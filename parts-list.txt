@@ -1,0 +1,7 @@
+7x - threaded inserts - m2 x 3mm
+5x - m2 x 4mm screw
+8x - cherry mx switches
+2x - ~26awg stripped solid wire - 90mm
+1x - 2-axis joystick - https://www.amazon.com/dp/B07PZVDKWD?ref=fed_asin_title
+1x - rotary encoder module
+1x - arduino pro micro
