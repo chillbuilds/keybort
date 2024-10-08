@@ -5,6 +5,7 @@
 
 #include <Keyboard.h>
 #include <Mouse.h>
+#include <EEPROM.h>
 
 const int key1 = 10;
 const int key2 = 16;
