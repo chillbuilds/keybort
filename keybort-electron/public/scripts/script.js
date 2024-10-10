@@ -26,6 +26,8 @@ $('.key').on('click', function() {
         }else{
             eepromAddress = selectedKey
         }
+        let keyAddress = $(this).attr('id').split('key').join('')
+        $('#keySpriteSrc').attr('src', `./public/images/key-sprites/keybort-${keyAddress}.png`);
         $('#popup').attr('style', 'display:inline-block;')
         $('#keyUpdate').attr('style', 'display:inline-block;')
         $('#pageShade').attr('style', 'display:inline-block;')

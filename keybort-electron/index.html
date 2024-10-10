@@ -5,6 +5,7 @@
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'">
     <link href="./public/styles.css" rel="stylesheet">
+    <!-- <link rel="icon" type="image/png" href="./public/images/keybort-sprite-lg.png"> -->
     <title>keybort</title>
   </head>
   <body>
@@ -12,11 +13,15 @@
     <div id="popup">
         <div id="popupClose" style="position:absolute; right:0; padding: 4px; cursor:pointer; font-weight:bold;">X</div>
         <div id="keyUpdate" style="display:none;">
-            <div id="popupContent">
-                <input type="input" id="keystroke" style="width:150px; margin-left:62px; margin-top:28px;" placeholder="enter keystroke">
+            
+            <div style="position:absolute; left:80px; margin-top:14px;">
+                <img id="keySpriteSrc" style="width: 120px;" src="./public/images/keybort-sprite-lg.png">
+            </div>
+            <div id="keyStrokeInput">
+                <input type="input" id="keystroke" style="width:150px; margin-left:62px; margin-top:98px;" placeholder="enter keystroke">
             </div>
     
-            <div style="width:70%; margin-left:15%; margin-top:28px; margin-bottom:22px; border-bottom: 4px solid rgba(0, 0, 0, 0.1);"></div>
+            <div style="width:70%; margin-left:15%; margin-top:14px; margin-bottom:12px; border-bottom: 4px solid rgba(0, 0, 0, 0.1);"></div>
             <div id="modifierContainer" style="font-size:14px; width:220px; margin-left:56px; text-align:left;">
                 <div style="width:fit-content; font-weight: bold; margin-bottom:10px; margin-left:2px;">
                     modifier:
@@ -34,25 +39,76 @@
         </div>
 
         <div id="rotaryUpdate" style="display:none;">
-            <div style="width:270px; margin-left:11px; margin-top:24px;">
+            <div style="position: absolute;">
+                <div style="text-align:center; width:92px; margin-left:92px; margin-top:12px; font-size:14px; cursor:pointer; border: 1px solid rgba(0, 0, 0, 0.2); padding:4px; background:rgba(255, 255, 255, 0.4);">volume mode</div>
+            </div>
+            <div style="width:270px; margin-left:16px; margin-top:42px;">
                 <div style="padding:8px; position:relative; float:left;">
                     <img style="width:68px;" src="./public/images/rotary-knob.png"><br>
-                    <input id="rotaryLeftKey" placeholder="keystroke" style="width:64px; margin-top:8px;">
+                    <input id="rotaryLeftKey" placeholder="left" style="width:64px; margin-top:8px;">
                 </div>
                 <div style="padding:8px; position:relative; float:left;">
                     <img style="width:68px;" src="./public/images/rotary-knob-side.png"><br>
-                    <input id="rotaryBtnKey" placeholder="keystroke" style="width:64px; margin-top:8px;">
+                    <input id="rotaryBtnKey" placeholder="click" style="width:64px; margin-top:8px;">
                 </div>
                 <div style="padding:8px; position:relative; float:left;">
                     <img style="width:68px; transform: scaleX(-1);" src="./public/images/rotary-knob.png"><br>
-                    <input id="rotaryRightKey" placeholder="keystroke" style="width:64px; margin-top:8px;">
+                    <input id="rotaryRightKey" placeholder="right" style="width:64px; margin-top:8px;">
                 </div>
+            </div>
+            <div style="width:70%; margin-left:15%; margin-top:156px; margin-bottom:8px; border-bottom: 4px solid rgba(0, 0, 0, 0.1);"></div>
+            <div id="modifierContainer" style="font-size:14px; width:220px; margin-left:26px; text-align:left;">
+                <div style="width:fit-content; font-weight: bold; margin-bottom:6px; margin-left:2px;">
+                    modifier:
+                </div>
+                <div style="position:relative; float:left; margin-top:-1px;"><input type="radio" id="ctrl" name="fav_language" value="ctrl"></div>
+                <div style="position:relative; float:left;">ctrl</div>
+                <div style="position:relative; float:left; margin-top:-1px;"><input type="radio" id="alt" name="fav_language" value="alt"></div>
+                <div style="position:relative; float:left;">alt</div>
+                <div style="position:relative; float:left; margin-top:-1px;"><input type="radio" id="shft" name="fav_language" value="shft"></div>
+                <div style="position:relative; float:left;">shift</div>
+                <div style="position:relative; float:left; margin-top:-1px;"><input type="radio" id="win" name="fav_language" value="win"></div>
+                <div style="position:relative; float:left;">win</div>
             </div>
             <div class="update" id="rotaryUpdateBtn" style="font-size:14px; position:absolute; bottom:6px; right:6px; cursor:pointer; border: 1px solid rgba(0, 0, 0, 0.2); padding:4px; background:rgba(255, 255, 255, 0.4);">update</div>
         </div>
 
         <div id="joystickUpdate" style="display:none;">
-            joystick
+            <div style="position: absolute;">
+                <div style="text-align:center; width:92px; margin-left:92px; margin-top:12px; font-size:14px; cursor:pointer; border: 1px solid rgba(0, 0, 0, 0.2); padding:4px; background:rgba(255, 255, 255, 0.4);">
+                    mouse mode
+                </div>
+            </div>
+            <div style="width:270px; margin-left:16px; margin-top:42px;">
+                <div style="padding:8px; position:relative; float:left;">
+                    <img style="width:68px;" src="./public/images/joystick-front-x.png"><br>
+                    <input id="rotaryLeftKey" placeholder="x-" style="width:32px; margin-top:8px;">
+                    <input id="rotaryLeftKey" placeholder="x+" style="width:32px; margin-top:8px;">
+                </div>
+                <div style="padding:8px; position:relative; float:left;">
+                    <img style="width:68px;" src="./public/images/joystick-button.png"><br>
+                    <input id="rotaryBtnKey" placeholder="click" style="width:64px; margin-top:8px;">
+                </div>
+                <div style="padding:8px; position:relative; float:left;">
+                    <img style="width:68px;" src="./public/images/joystick-front-y.png"><br>
+                    <input id="rotaryRightKey" placeholder="y-" style="width:32px; margin-top:8px;">
+                    <input id="rotaryRightKey" placeholder="y+" style="width:32px; margin-top:8px;">
+                </div>
+            </div>
+            <div style="width:70%; margin-left:15%; margin-top:156px; margin-bottom:8px; border-bottom: 4px solid rgba(0, 0, 0, 0.1);"></div>
+            <div id="modifierContainer" style="font-size:14px; width:220px; margin-left:26px; text-align:left;">
+                <div style="width:fit-content; font-weight: bold; margin-bottom:6px; margin-left:2px;">
+                    modifier:
+                </div>
+                <div style="position:relative; float:left; margin-top:-1px;"><input type="radio" id="ctrl" name="fav_language" value="ctrl"></div>
+                <div style="position:relative; float:left;">ctrl</div>
+                <div style="position:relative; float:left; margin-top:-1px;"><input type="radio" id="alt" name="fav_language" value="alt"></div>
+                <div style="position:relative; float:left;">alt</div>
+                <div style="position:relative; float:left; margin-top:-1px;"><input type="radio" id="shft" name="fav_language" value="shft"></div>
+                <div style="position:relative; float:left;">shift</div>
+                <div style="position:relative; float:left; margin-top:-1px;"><input type="radio" id="win" name="fav_language" value="win"></div>
+                <div style="position:relative; float:left;">win</div>
+            </div>
             <div class="update" id="joystickUpdateBtn" style="font-size:14px; position:absolute; bottom:6px; right:6px; cursor:pointer; border: 1px solid rgba(0, 0, 0, 0.2); padding:4px; background:rgba(255, 255, 255, 0.4);">update</div>
         </div>
 

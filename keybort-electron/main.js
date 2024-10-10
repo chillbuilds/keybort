@@ -60,7 +60,8 @@ function createWindow () {
     height: 500,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
-    }
+    },
+    icon: path.join(__dirname, './public/images/keybort-icon.png')
   })
 
   // and load the index.html of the app.
