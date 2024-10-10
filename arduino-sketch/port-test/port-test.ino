@@ -5,15 +5,13 @@ bool addressReceived = false;
 bool keyReceived = false;
 
 char address[2];
-char key[2];
-char modifier[2];
+char key;
+char modifier[4];
 
 int arrIndex = 0;
 
 void setup() {
   Serial.begin(9600);
-
-  byte valueToSave = 42;
 
   // EEPROM.write(0, valueToSave);
 }
@@ -32,16 +30,14 @@ void loop() {
       address[arrIndex] = incomingByte;
       arrIndex++;
     }
-
     if(receivingData == true && addressReceived == true && keyReceived == false){
-      key[arrIndex] = (int)incomingByte;
-      arrIndex++;
+      key = (int)incomingByte;
+      keyReceived = true;
     }
     if(receivingData == true && addressReceived == true && keyReceived == true){
       modifier[arrIndex] = (int)incomingByte;
       arrIndex++;
     }
-
     if(incomingByte == 126){
       receivingData = true;
     }
@@ -53,7 +49,6 @@ void loop() {
 //                 underscore
     if(incomingByte == 95){
       keyReceived = true;
-      arrIndex = 0;
     }
 
     if(incomingByte == 96){
@@ -63,7 +58,7 @@ void loop() {
       arrIndex = 0;
     }
 
-    // Serial.print(incomingByte);
+    Serial.print(incomingByte);
   }
 }
 
@@ -71,21 +66,9 @@ void updateKey() {
   String parsedAddress = String(address[0]) + String(address[1]);
   int addressInt = parsedAddress.toInt();
 
-  Serial.println(EEPROM.read(12));
-  // EEPROM.write(addressInt, (int)key[0]);
-  // Serial.println("updated address");
-
-  // Serial.println("");
-  // Serial.print("address: ");
-  // Serial.print(address[0]);
-  // Serial.print(", ");
-  // Serial.print(address[1]);
-
-  // Serial.println("");
-  // Serial.print("key: ");
-  // Serial.print((int)key[0]);
-  // Serial.print(", ");
-  // Serial.print((int)key[1]);
+  // Serial.println(EEPROM.read(12));
+  EEPROM.write(addressInt, (int)key);
+  Serial.println("key updated");
 
   // Serial.println("");
   // Serial.print("modifier: ");

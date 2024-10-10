@@ -1,0 +1,59 @@
+body {
+    background: #8F95D3;
+    font-family: Arial, Helvetica, sans-serif;
+    user-select: none;
+    overflow: hidden;
+}
+
+input {
+    outline: none;
+    background: rgba(255, 255, 255, 0.4);
+    border: #8F95D3;
+    padding: 2px;
+}
+
+#buttons {
+    position: absolute;
+    top: 0;
+}
+
+.key {
+    padding: 26px;
+    background: rgba(0, 0, 0, 0);
+    position: absolute;
+    cursor: pointer;
+}
+
+.key:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+#controllerImg {
+    width: 600px;
+    padding: 20px;
+}
+
+#popup {
+    display:none;
+    position: fixed;
+    background: #8F95D3;
+    width: 287px;
+    height: 200px;
+    margin-left: 144px;
+    margin-top: 57px;
+    z-index: 1000;
+    border-radius: 2px;
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    /* border-bottom: 4px solid rgba(0, 0, 0, 0.2); */
+}
+
+#pageShade {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 999;
+    background: rgba(0, 0, 0, 0.4);
+}
