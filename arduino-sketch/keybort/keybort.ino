@@ -6,7 +6,8 @@
 #include <Keyboard.h>
 #include <Mouse.h>
 #include <EEPROM.h>
-// read saved key values
+
+// saved key values
 byte key1Val = EEPROM.read(1);
 byte key2Val = EEPROM.read(2);
 byte key3Val = EEPROM.read(3);
@@ -25,6 +26,26 @@ byte joystickYMinusVal = EEPROM.read(15);
 byte joystickYPlusVal = EEPROM.read(16);
 byte slidePotMinusVal = EEPROM.read(17);
 byte slidePotPlusVal = EEPROM.read(18);
+
+// modifiers
+byte key1Mod = EEPROM.read(19);
+byte key2Mod = EEPROM.read(20);
+byte key3Mod = EEPROM.read(21);
+byte key4Mod = EEPROM.read(22);
+byte key5Mod = EEPROM.read(23);
+byte key6Mod = EEPROM.read(24);
+byte key7Mod = EEPROM.read(25);
+byte key8Mod = EEPROM.read(26);
+byte rotaryMinusMod = EEPROM.read(27);
+byte rotaryBtnMod = EEPROM.read(28);
+byte rotaryPlusMod = EEPROM.read(29);
+byte joystickXMinusMod = EEPROM.read(30);
+byte joystickXPlusMod = EEPROM.read(31);
+byte joystickBtnMod = EEPROM.read(32);
+byte joystickYMinusMod = EEPROM.read(33);
+byte joystickYPlusMod = EEPROM.read(34);
+byte slidePotMinusMod = EEPROM.read(35);
+byte slidePotPlusMod = EEPROM.read(36);
 
 const int key1 = 10;
 const int key2 = 16;
@@ -60,7 +81,7 @@ bool btnCooldown = false;
 
 char address[2];
 int key;
-char modifier[2];
+int modifier;
 
 void setup() {
   Serial.begin(9600);
@@ -195,37 +216,30 @@ void loop() {
   Serial.println(rotaryCounter);
   } 
   rotaryLastState = rotaryState;
+
   if(digitalRead(key1) == LOW){
-    Keyboard.write(key1Val);
-    delay(200);
+    pressKey(key1Val, key1Mod);
   }
   if(digitalRead(key2) == LOW){
-    Keyboard.write(key2Val);
-    delay(200);
+    pressKey(key2Val, key2Mod);
   }
   if(digitalRead(key3) == LOW){
-    Keyboard.write(key3Val);
-    delay(200);
+    pressKey(key3Val, key3Mod);
   }
   if(digitalRead(key4) == LOW){
-    Keyboard.write(key4Val);
-    delay(200);
+    pressKey(key4Val, key4Mod);
   }
   if(digitalRead(key5) == LOW){
-    Keyboard.write(key5Val);
-    delay(200);
+    pressKey(key5Val, key5Mod);
   }
   if(digitalRead(key6) == LOW){
-    Keyboard.write(key6Val);
-    delay(200);
+    pressKey(key6Val, key6Mod);
   }
   if(digitalRead(key7) == LOW){
-    Keyboard.write(key7Val);
-    delay(200);
+    pressKey(key7Val, key7Mod);
   }
   if(digitalRead(key8) == LOW){
-    Keyboard.write(key8Val);
-    delay(200);
+    pressKey(key8Val, key8Mod);
   }
 
 }
@@ -234,10 +248,10 @@ void serialCheck() {
   if (Serial.available() > 0) {
     
     String incomingString = Serial.readStringUntil('\n');
-    int serialIntArray[5];
-    String serialStringArray[5];
+    int serialIntArray[4];
+    String serialStringArray[4];
 
-    for(int i = 0; i < 5; i++){
+    for(int i = 0; i < 4; i++){
       serialIntArray[i] = (int)incomingString.charAt(i);
       serialStringArray[i] = incomingString.charAt(i);
     }
@@ -249,63 +263,102 @@ void serialCheck() {
     Serial.print("address: ");
     Serial.println(addressInt);
 
+    modifier = (int)serialIntArray[3];
+    Serial.print("modifier: ");
+    Serial.println((int)modifier);
+
     EEPROM.write(addressInt, (int)serialIntArray[2]);
+    EEPROM.write(addressInt + 18, modifier);
     Serial.println("key updated");
 
     if(addressInt == 1){
       key1Val = (byte)serialIntArray[2];
+      key1Mod = (byte)serialIntArray[3];
     }
     if(addressInt == 2){
       key2Val = (byte)serialIntArray[2];
+      key2Mod = (byte)serialIntArray[3];
     }
     if(addressInt == 3){
       key3Val = (byte)serialIntArray[2];
+      key3Mod = (byte)serialIntArray[3];
     }
     if(addressInt == 4){
       key4Val = (byte)serialIntArray[2];
+      key4Mod = (byte)serialIntArray[3];
     }
     if(addressInt == 5){
       key5Val = (byte)serialIntArray[2];
+      key5Mod = (byte)serialIntArray[3];
     }
     if(addressInt == 6){
       key6Val = (byte)serialIntArray[2];
+      key6Mod = (byte)serialIntArray[3];
     }
     if(addressInt == 7){
       key7Val = (byte)serialIntArray[2];
+      key7Mod = (byte)serialIntArray[3];
     }
     if(addressInt == 8){
       key8Val = (byte)serialIntArray[2];
+      key8Mod = (byte)serialIntArray[3];
     }
     if(addressInt == 9){
       rotaryMinusVal = (byte)serialIntArray[2];
+      rotaryMinusMod = (byte)serialIntArray[3];
     }
     if(addressInt == 10){
       rotaryBtnVal = (byte)serialIntArray[2];
+      rotaryBtnMod = (byte)serialIntArray[3];
     }
     if(addressInt == 11){
       rotaryPlusVal = (byte)serialIntArray[2];
+      rotaryPlusMod = (byte)serialIntArray[3];
     }
     if(addressInt == 12){
       joystickXMinusVal = (byte)serialIntArray[2];
+      joystickXMinusMod = (byte)serialIntArray[3];
     }
     if(addressInt == 13){
       joystickXPlusVal = (byte)serialIntArray[2];
+      joystickXPlusMod = (byte)serialIntArray[3];
     }
     if(addressInt == 14){
       joystickBtnVal = (byte)serialIntArray[2];
+      joystickBtnMod = (byte)serialIntArray[3];
     }
     if(addressInt == 15){
       joystickYMinusVal = (byte)serialIntArray[2];
+      joystickYMinusMod = (byte)serialIntArray[3];
     }
     if(addressInt == 16){
       joystickYPlusVal = (byte)serialIntArray[2];
+      joystickYPlusMod = (byte)serialIntArray[3];
     }
     if(addressInt == 17){
       slidePotMinusVal = (byte)serialIntArray[2];
+      slidePotMinusMod = (byte)serialIntArray[3];
     }
     if(addressInt == 18){
       slidePotPlusVal = (byte)serialIntArray[2];
+      slidePotPlusMod = (byte)serialIntArray[3];
     }
-
   }
+}
+
+void pressKey(int keyVal, int keyMod) {
+  if(keyMod == 99){
+    Keyboard.press(KEY_LEFT_CTRL);
+    Keyboard.write(keyVal);
+  }else if(keyMod == 97){
+    Keyboard.press(KEY_LEFT_ALT);
+    Keyboard.write(keyVal);
+  }else if(keyMod == 115){
+    Keyboard.press(KEY_LEFT_SHIFT);
+    Keyboard.write(keyVal);
+  }else{
+    Keyboard.write(keyVal);
+  }
+  Keyboard.releaseAll();
+  delay(200);
 }

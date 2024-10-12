@@ -2,7 +2,13 @@ $('#keyUpdateBtn').on('click', () => {
     // eeprom addresses
     // 1 - 8
     let keystroke = $('#keystroke').val()
-    let modifier = 'sh'
+    let modifier = $('input[name="modifier"]:checked').val()
+    if(modifier){
+        modifier = modifier.split('').shift()
+    }else{
+        modifier = '/'
+    }
+    console.log(modifier)
     window.api.sendString(`${eepromAddress}${keystroke}${modifier}\n`)
     $('#popup').attr('style', 'display:none;')
     $('#pageShade').attr('style', 'display:none;')
