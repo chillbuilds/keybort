@@ -20,12 +20,17 @@ $('#rotaryUpdateBtn').on('click', () => {
         if($('#rotaryBtnKey').val()){
             window.api.sendString(`10${$('#rotaryBtnKey').val()}sh\n`)
         }
-    }, 500)
+    }, 200)
     setTimeout(()=>{
         if($('#rotaryRightKey').val()){
             window.api.sendString(`11${$('#rotaryRightKey').val()}sh\n`)
         }
-    }, 1000)
+    }, 400)
+    setTimeout(()=>{
+        $('#rotaryLeftKey').val('')
+        $('#rotaryBtnKey').val('')
+        $('#rotaryRightKey').val('')
+    }, 600)
     $('#popup').attr('style', 'display:none;')
     $('#pageShade').attr('style', 'display:none;')
     $('#rotaryUpdate').attr('style', 'display:none;')
@@ -33,7 +38,7 @@ $('#rotaryUpdateBtn').on('click', () => {
 
 $('#joystickUpdateBtn').on('click', () => {
     // eeprom addresses
-    // 12, 13, 14
+    // 12, 13, 14, 15, 16
     let keystroke = $('#keystroke').val()
     let modifier = 'sh'
     window.api.sendString(`${eepromAddress}${keystroke}${modifier}\n`)
@@ -44,19 +49,21 @@ $('#joystickUpdateBtn').on('click', () => {
 
 $('#slidePotUpdateBtn').on('click', () => {
     // eeprom addresses
-    // 15, 16
-    let keystroke = $('#keystroke').val()
-    let modifier = 'sh'
-    window.api.sendString(`${eepromAddress}${keystroke}${modifier}\n`)
+    // 17, 18
+    setTimeout(()=>{
+        if($('#slidePotLeftKey').val()){
+            window.api.sendString(`17${$('#slidePotLeftKey').val()}sh\n`)
+        }
+    }, 200)
+    setTimeout(()=>{
+        if($('#slidePotRightKey').val()){
+            window.api.sendString(`18${$('#slidePotRightKey').val()}sh\n`)
+        }
+    }, 400)
     $('#popup').attr('style', 'display:none;')
     $('#pageShade').attr('style', 'display:none;')
     $('#slidePotUpdate').attr('style', 'display:none;')
 })
-
-// document.getElementById('sendButton').addEventListener('click', () => {
-//     // const inputString = document.getElementById('inputField').value; // Get input from a field
-//     window.api.sendString('~01-r_ct`') // Send the string to the main process
-// })
   
 // Listen for the response from the main process
 window.api.onStringResponse((response) => {

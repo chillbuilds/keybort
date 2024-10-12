@@ -7,6 +7,7 @@ $('.key').on('click', function() {
         $('#popup').attr('style', 'display:inline-block;')
         $('#rotaryUpdate').attr('style', 'display:inline-block;')
         $('#pageShade').attr('style', 'display:inline-block;')
+        $('#rotaryLeftKey').focus()
     }else
     if($(this).attr('id') == 'key10'){
         // eepromAddress = `10`
@@ -44,4 +45,7 @@ $('#popupClose').on('click', () => {
     $('#pageShade').attr('style', 'display:none;')
     $('#popupText').html('')
     $('#keystroke').val('')
+    $('#rotaryLeftKey').val('')
+    $('#rotrayBtnKey').val('')
+    $('#rotaryRightKey').val('')
 })
