@@ -50,7 +50,7 @@ int slidePotLastState;
 int mouseSensitivity = 1;
 
 unsigned long previousSystemDelayMillis = 0;
-int systemDelayInterval = 400;
+int systemDelayInterval = 500;
 bool btnCooldown = false;
 
 char address[2];
@@ -88,29 +88,35 @@ void loop() {
   unsigned long systemDelayMillis = millis();
 
   if (systemDelayMillis - previousSystemDelayMillis >= systemDelayInterval) {
-    previousSystemDelayMillis = systemDelayMillis;  // reset the timer
+      previousSystemDelayMillis = systemDelayMillis;  // reset the timer
 
-    slidePotState = analogRead(slidePot);
+      slidePotState = analogRead(slidePot);
 
-    Serial.print("slidePotState: ");
-    Serial.println(slidePotState);
-    Serial.print("slidePotLastState: ");
-    Serial.println(slidePotLastState);
+      Serial.print("slidePotState: ");
+      Serial.println(slidePotState);
+      Serial.print("slidePotLastState: ");
+      Serial.println(slidePotLastState);
 
-    if(slidePotState <= slidePotLastState - 70 && btnCooldown == false){
-      btnCooldown = true;
-      Keyboard.write(slidePotMinusVal);
-    }
-    if(slidePotState >= slidePotLastState + 70 && btnCooldown == false){
-      btnCooldown = true;
-      Keyboard.write(slidePotPlusVal);
-    }
+      if(!btnCooldown){
+          if(slidePotState <= slidePotLastState - 100){
+              btnCooldown = true;
+              Keyboard.write(slidePotMinusVal);
+          }else if(slidePotState >= slidePotLastState + 100){
+              btnCooldown = true;
+              Keyboard.write(slidePotPlusVal);
+          }
 
-    slidePotLastState = slidePotState;
+          if(btnCooldown){
+              slidePotLastState = slidePotState;
+          }
+      }
 
-    btnCooldown = false;
+      if(btnCooldown){
+          delay(systemDelayInterval);
+          btnCooldown = false;
+      }
   }
-
+  
   int slidePotReading = analogRead(slidePot);
 
   mouseSensitivity = map(slidePotReading, 0, 1023, 1, 10);
