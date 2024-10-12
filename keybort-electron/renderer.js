@@ -8,7 +8,7 @@ $('#keyUpdateBtn').on('click', () => {
     $('#pageShade').attr('style', 'display:none;')
     $('#keystroke').val('')
     $('#keyUpdate').attr('style', 'display:none;')
-    $('#keySpriteSrc').attr('src', `./public/images/key-sprites/keybort-sprite.png`);
+    $('#keySpriteSrc').attr('src', `./public/images/key-sprites/keybort-sprite.png`)
 })
 
 $('#rotaryUpdateBtn').on('click', () => {
@@ -40,6 +40,31 @@ $('#rotaryUpdateBtn').on('click', () => {
 $('#joystickUpdateBtn').on('click', () => {
     // eeprom addresses
     // 12, 13, 14, 15, 16
+    setTimeout(()=>{
+        if($('#joystickXMinusKey').val()){
+            window.api.sendString(`12${$('#joystickXMinusKey').val()}sh\n`)
+        }
+    }, 200)
+    setTimeout(()=>{
+        if($('#joystickXPlusKey').val()){
+            window.api.sendString(`13${$('#joystickXPlusKey').val()}sh\n`)
+        }
+    }, 400)
+    setTimeout(()=>{
+        if($('#joystickBtnKey').val()){
+            window.api.sendString(`14${$('#joystickBtnKey').val()}sh\n`)
+        }
+    }, 600)
+    setTimeout(()=>{
+        if($('#joystickYMinusKey').val()){
+            window.api.sendString(`15${$('#joystickYMinusKey').val()}sh\n`)
+        }
+    }, 800)
+    setTimeout(()=>{
+        if($('#joystickYPlusKey').val()){
+            window.api.sendString(`16${$('#joystickYPlusKey').val()}sh\n`)
+        }
+    }, 1000)
     let keystroke = $('#keystroke').val()
     let modifier = 'sh'
     window.api.sendString(`${eepromAddress}${keystroke}${modifier}\n`)
@@ -64,6 +89,8 @@ $('#slidePotUpdateBtn').on('click', () => {
     $('#popup').attr('style', 'display:none;')
     $('#pageShade').attr('style', 'display:none;')
     $('#slidePotUpdate').attr('style', 'display:none;')
+    $('#slidePotLeftKey').val('')
+    $('#slidePotRightKey').val('')
 })
   
 // Listen for the response from the main process

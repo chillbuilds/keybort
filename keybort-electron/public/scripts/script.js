@@ -48,5 +48,7 @@ $('#popupClose').on('click', () => {
     $('#rotaryLeftKey').val('')
     $('#rotrayBtnKey').val('')
     $('#rotaryRightKey').val('')
-    $('#keySpriteSrc').attr('src', `./public/images/key-sprites/keybort-sprite.png`);
+    $('#slidePotLeftKey').val('')
+    $('#slidePotRightKey').val('')
+    $('#keySpriteSrc').attr('src', `./public/images/key-sprites/keybort-sprite.png`)
 })

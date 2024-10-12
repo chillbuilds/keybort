@@ -18,6 +18,11 @@ byte key8Val = EEPROM.read(8);
 byte rotaryMinusVal = EEPROM.read(9);
 byte rotaryBtnVal = EEPROM.read(10);
 byte rotaryPlusVal = EEPROM.read(11);
+byte joystickXMinusVal = EEPROM.read(12);
+byte joystickXPlusVal = EEPROM.read(13);
+byte joystickBtnVal = EEPROM.read(14);
+byte joystickYMinusVal = EEPROM.read(15);
+byte joystickYPlusVal = EEPROM.read(16);
 byte slidePotMinusVal = EEPROM.read(17);
 byte slidePotPlusVal = EEPROM.read(18);
 
@@ -42,7 +47,7 @@ const int slidePot = A3;
 
 int rotaryCounter = 0; 
 int rotaryState;
-int rotaryLastState;  
+int rotaryLastState;
 
 int slidePotState;
 int slidePotLastState;
@@ -85,17 +90,14 @@ void setup() {
 
 void loop() {
 
+  serialCheck();
+
   unsigned long systemDelayMillis = millis();
 
   if (systemDelayMillis - previousSystemDelayMillis >= systemDelayInterval) {
       previousSystemDelayMillis = systemDelayMillis;  // reset the timer
 
       slidePotState = analogRead(slidePot);
-
-      Serial.print("slidePotState: ");
-      Serial.println(slidePotState);
-      Serial.print("slidePotLastState: ");
-      Serial.println(slidePotLastState);
 
       if(!btnCooldown){
           if(slidePotState <= slidePotLastState - 100){
@@ -110,7 +112,7 @@ void loop() {
               slidePotLastState = slidePotState;
           }
       }
-
+      
       if(btnCooldown){
           delay(systemDelayInterval);
           btnCooldown = false;
@@ -121,31 +123,50 @@ void loop() {
 
   mouseSensitivity = map(slidePotReading, 0, 1023, 1, 10);
 
-  serialCheck();
-
   if(analogRead(joystickX) > 486){
-    Mouse.move(mouseSensitivity, 0, 0);
-    delay(1);
-  }
-  if(analogRead(joystickX) < 482){
-    Mouse.move(-(mouseSensitivity), 0, 0);
-    delay(1);
-  }
-  if(analogRead(joystickY) > 530){
-    Mouse.move(0, mouseSensitivity, 0);
-    delay(1);
-  }
-  if(analogRead(joystickY) < 520){
-    Mouse.move(0, -(mouseSensitivity), 0);
-    delay(1);
-  }
-  
-  if(digitalRead(thumbBtn) == LOW){
-    Mouse.press(MOUSE_LEFT);
-    Mouse.release(MOUSE_LEFT);
-    Serial.println("pressed mouse left");
+    Keyboard.write(joystickXMinusVal);
     delay(200);
   }
+  if(analogRead(joystickX) < 482){
+    Keyboard.write(joystickXPlusVal);
+    delay(200);
+  }
+  if(digitalRead(thumbBtn) == LOW){
+    Keyboard.write(joystickBtnVal);
+    delay(200);
+  }
+  if(analogRead(joystickY) > 530){
+    Keyboard.write(joystickYMinusVal);
+    delay(200);
+  }
+  if(analogRead(joystickY) < 520){
+    Keyboard.write(joystickYPlusVal);
+    delay(200);
+  }
+
+  // if(analogRead(joystickX) > 486){
+  //   Mouse.move(mouseSensitivity, 0, 0);
+  //   delay(1);
+  // }
+  // if(analogRead(joystickX) < 482){
+  //   Mouse.move(-(mouseSensitivity), 0, 0);
+  //   delay(1);
+  // }
+  // if(analogRead(joystickY) > 530){
+  //   Mouse.move(0, mouseSensitivity, 0);
+  //   delay(1);
+  // }
+  // if(analogRead(joystickY) < 520){
+  //   Mouse.move(0, -(mouseSensitivity), 0);
+  //   delay(1);
+  // }
+  
+  // if(digitalRead(thumbBtn) == LOW){
+  //   Mouse.press(MOUSE_LEFT);
+  //   Mouse.release(MOUSE_LEFT);
+  //   Serial.println("pressed mouse left");
+  //   delay(200);
+  // }
 
   if(digitalRead(rotaryBtn) == LOW){
     // Mouse.press(MOUSE_RIGHT);
@@ -263,6 +284,21 @@ void serialCheck() {
     }
     if(addressInt == 11){
       rotaryPlusVal = (byte)serialIntArray[2];
+    }
+    if(addressInt == 12){
+      joystickXMinusVal = (byte)serialIntArray[2];
+    }
+    if(addressInt == 13){
+      joystickXPlusVal = (byte)serialIntArray[2];
+    }
+    if(addressInt == 14){
+      joystickBtnVal = (byte)serialIntArray[2];
+    }
+    if(addressInt == 15){
+      joystickYMinusVal = (byte)serialIntArray[2];
+    }
+    if(addressInt == 16){
+      joystickYPlusVal = (byte)serialIntArray[2];
     }
     if(addressInt == 17){
       slidePotMinusVal = (byte)serialIntArray[2];
