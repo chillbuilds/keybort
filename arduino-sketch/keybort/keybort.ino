@@ -18,6 +18,8 @@ byte key8Val = EEPROM.read(8);
 byte rotaryMinusVal = EEPROM.read(9);
 byte rotaryBtnVal = EEPROM.read(10);
 byte rotaryPlusVal = EEPROM.read(11);
+byte slidePotMinusVal = EEPROM.read(17);
+byte slidePotPlusVal = EEPROM.read(18);
 
 const int key1 = 10;
 const int key2 = 16;
@@ -42,19 +44,18 @@ int rotaryCounter = 0;
 int rotaryState;
 int rotaryLastState;  
 
+int slidePotState;
+int slidePotLastState;
+
 int mouseSensitivity = 1;
 
-// key update variables
-bool receivingData = false;
-bool addressReceived = false;
-bool keyReceived = false;
+unsigned long previousSystemDelayMillis = 0;
+int systemDelayInterval = 400;
+bool btnCooldown = false;
 
 char address[2];
 int key;
 char modifier[2];
-
-int arrIndex = 0;
-// end key update variables
 
 void setup() {
   Serial.begin(9600);
@@ -79,9 +80,36 @@ void setup() {
   pinMode(key8, INPUT_PULLUP);
 
   rotaryLastState = digitalRead(rotaryA);
+  slidePotLastState = analogRead(slidePot);
 }
 
 void loop() {
+
+  unsigned long systemDelayMillis = millis();
+
+  if (systemDelayMillis - previousSystemDelayMillis >= systemDelayInterval) {
+    previousSystemDelayMillis = systemDelayMillis;  // reset the timer
+
+    slidePotState = analogRead(slidePot);
+
+    Serial.print("slidePotState: ");
+    Serial.println(slidePotState);
+    Serial.print("slidePotLastState: ");
+    Serial.println(slidePotLastState);
+
+    if(slidePotState <= slidePotLastState - 70 && btnCooldown == false){
+      btnCooldown = true;
+      Keyboard.write(slidePotMinusVal);
+    }
+    if(slidePotState >= slidePotLastState + 70 && btnCooldown == false){
+      btnCooldown = true;
+      Keyboard.write(slidePotPlusVal);
+    }
+
+    slidePotLastState = slidePotState;
+
+    btnCooldown = false;
+  }
 
   int slidePotReading = analogRead(slidePot);
 
@@ -118,30 +146,26 @@ void loop() {
     // Mouse.release(MOUSE_RIGHT);
     Keyboard.write(rotaryBtnVal);
     Serial.println("pressed mouse right");
-    delay(200);
+    delay(300);
   }
 
-  rotaryState = digitalRead(rotaryA); // Reads the "current" state of the outputA
-  // If the previous and the current state of the outputA are different, that means a Pulse has occured
-  if (rotaryState != rotaryLastState){     
-    // If the outputB state is different to the outputA state, that means the encoder is rotating clockwise
-    if (digitalRead(rotaryB) != rotaryState) { 
-      rotaryCounter ++;
-      if(rotaryCounter >= 2){
-        rotaryCounter = 0;
-        Keyboard.write(rotaryPlusVal);
-      }
-    } else {
-      rotaryCounter --;
-      if(rotaryCounter < -1){
-        rotaryCounter = 0;
-        Keyboard.write(rotaryMinusVal);
-      }
-      
-      
+  rotaryState = digitalRead(rotaryA);
+ if (rotaryState != rotaryLastState){     
+  if (digitalRead(rotaryB) != rotaryState) { 
+    rotaryCounter ++;
+    if(rotaryCounter >= 2){
+      rotaryCounter = 0;
+      Keyboard.write(rotaryPlusVal);
     }
-    Serial.print("Position: ");
-    Serial.println(rotaryCounter);
+  } else {
+    rotaryCounter --;
+    if(rotaryCounter < -1){
+      rotaryCounter = 0;
+      Keyboard.write(rotaryMinusVal);
+    }
+  }
+  Serial.print("Position: ");
+  Serial.println(rotaryCounter);
   } 
   rotaryLastState = rotaryState;
   if(digitalRead(key1) == LOW){
@@ -233,6 +257,12 @@ void serialCheck() {
     }
     if(addressInt == 11){
       rotaryPlusVal = (byte)serialIntArray[2];
+    }
+    if(addressInt == 17){
+      slidePotMinusVal = (byte)serialIntArray[2];
+    }
+    if(addressInt == 18){
+      slidePotPlusVal = (byte)serialIntArray[2];
     }
 
   }
