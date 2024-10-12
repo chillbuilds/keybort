@@ -8,6 +8,7 @@ $('#keyUpdateBtn').on('click', () => {
     $('#pageShade').attr('style', 'display:none;')
     $('#keystroke').val('')
     $('#keyUpdate').attr('style', 'display:none;')
+    $('#keySpriteSrc').attr('src', `./public/images/key-sprites/keybort-sprite.png`);
 })
 
 $('#rotaryUpdateBtn').on('click', () => {
