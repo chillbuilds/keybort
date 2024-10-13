@@ -14,6 +14,7 @@ $('#keyUpdateBtn').on('click', () => {
     $('#keystroke').val('')
     $('#keyUpdate').attr('style', 'display:none;')
     $('#keySpriteSrc').attr('src', `./public/images/key-sprites/keybort-sprite.png`)
+    $('input[type="checkbox"]').prop('checked', false)
 })
 
 $('#rotaryUpdateBtn').on('click', () => {
@@ -46,42 +47,47 @@ $('#rotaryUpdateBtn').on('click', () => {
     $('#popup').attr('style', 'display:none;')
     $('#pageShade').attr('style', 'display:none;')
     $('#rotaryUpdate').attr('style', 'display:none;')
+    $('input[type="checkbox"]').prop('checked', false)
 })
 
 $('#joystickUpdateBtn').on('click', () => {
     // eeprom addresses
     // 12, 13, 14, 15, 16
+    let modifier = $('input[name="modifier"]:checked').val()
+    if(modifier){
+        modifier = modifier.split('').shift()
+    }else{
+        modifier = '/'
+    }
     setTimeout(()=>{
         if($('#joystickXMinusKey').val()){
-            window.api.sendString(`12${$('#joystickXMinusKey').val()}sh\n`)
+            window.api.sendString(`12${$('#joystickXMinusKey').val()}${modifier}\n`)
         }
     }, 200)
     setTimeout(()=>{
         if($('#joystickXPlusKey').val()){
-            window.api.sendString(`13${$('#joystickXPlusKey').val()}sh\n`)
+            window.api.sendString(`13${$('#joystickXPlusKey').val()}${modifier}\n`)
         }
     }, 400)
     setTimeout(()=>{
         if($('#joystickBtnKey').val()){
-            window.api.sendString(`14${$('#joystickBtnKey').val()}sh\n`)
+            window.api.sendString(`14${$('#joystickBtnKey').val()}${modifier}\n`)
         }
     }, 600)
     setTimeout(()=>{
         if($('#joystickYMinusKey').val()){
-            window.api.sendString(`15${$('#joystickYMinusKey').val()}sh\n`)
+            window.api.sendString(`15${$('#joystickYMinusKey').val()}${modifier}\n`)
         }
     }, 800)
     setTimeout(()=>{
         if($('#joystickYPlusKey').val()){
-            window.api.sendString(`16${$('#joystickYPlusKey').val()}sh\n`)
+            window.api.sendString(`16${$('#joystickYPlusKey').val()}${modifier}\n`)
         }
     }, 1000)
-    let keystroke = $('#keystroke').val()
-    let modifier = 'sh'
-    window.api.sendString(`${eepromAddress}${keystroke}${modifier}\n`)
     $('#popup').attr('style', 'display:none;')
     $('#pageShade').attr('style', 'display:none;')
     $('#joystickUpdate').attr('style', 'display:none;')
+    $('input[type="checkbox"]').prop('checked', false)
 })
 
 $('#slidePotUpdateBtn').on('click', () => {
@@ -102,6 +108,7 @@ $('#slidePotUpdateBtn').on('click', () => {
     $('#slidePotUpdate').attr('style', 'display:none;')
     $('#slidePotLeftKey').val('')
     $('#slidePotRightKey').val('')
+    $('input[type="checkbox"]').prop('checked', false)
 })
   
 // Listen for the response from the main process

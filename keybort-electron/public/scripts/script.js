@@ -51,6 +51,7 @@ $('#popupClose').on('click', () => {
     $('#slidePotLeftKey').val('')
     $('#slidePotRightKey').val('')
     $('#keySpriteSrc').attr('src', `./public/images/key-sprites/keybort-sprite.png`)
+    $('input[type="checkbox"]').prop('checked', false)
 })
 
 $('input[type="checkbox"]').on('click', function(e){
