@@ -118,6 +118,15 @@ $('#slidePotUpdateBtn').on('click', () => {
     $('#slidePotUpdate').attr('style', 'display:none;')
     $('input[type="checkbox"]').prop('checked', false)
 })
+
+$('.mouseMode').on('click', function(){
+    window.api.sendString(`12/m\n`)
+    $('#popup').attr('style', 'display:none;')
+    $('#pageShade').attr('style', 'display:none;')
+    $('#joystickUpdate').attr('style', 'display:none;')
+    $('#slidePotUpdate').attr('style', 'display:none;')
+    $('input[type="checkbox"]').prop('checked', false)
+})
   
 // Listen for the response from the main process
 window.api.onStringResponse((response) => {

@@ -122,11 +122,17 @@ void loop() {
 
     if (!btnCooldown) {
       if (slidePotState <= slidePotLastState - 100) {
+        previousSystemDelayMillis = systemDelayMillis;
         btnCooldown = true;
-        pressKey(slidePotMinusVal, slidePotMinusMod, 100);
+        if(joystickXMinusMod != 109){
+          pressKey(slidePotMinusVal, slidePotMinusMod, 0);
+        }
       } else if (slidePotState >= slidePotLastState + 100) {
+        previousSystemDelayMillis = systemDelayMillis;
         btnCooldown = true;
-        pressKey(slidePotPlusVal, slidePotPlusMod, 100);
+        if(joystickXMinusMod != 109){
+          pressKey(slidePotPlusVal, slidePotPlusMod, 0);
+        }
       }
 
       if (btnCooldown) {
@@ -135,7 +141,7 @@ void loop() {
     }
 
     if (btnCooldown) {
-      delay(systemDelayInterval);
+      // delay(systemDelayInterval);
       btnCooldown = false;
     }
   }
@@ -144,45 +150,47 @@ void loop() {
 
   mouseSensitivity = map(slidePotReading, 0, 1023, 1, 10);
 
-  if (analogRead(joystickX) < 460) {
-    pressKey(joystickXMinusVal, joystickXMinusMod, 200);
-  }
-  if (analogRead(joystickX) > 500) {
-    pressKey(joystickXPlusVal, joystickXPlusMod, 200);
-  }
-  if (digitalRead(thumbBtn) == LOW) {
-    pressKey(joystickBtnVal, joystickBtnMod, 200);
-  }
-  if (analogRead(joystickY) > 545) {
-    pressKey(joystickYMinusVal, joystickYMinusMod, 200);
-  }
-  if (analogRead(joystickY) < 505) {
-    pressKey(joystickYPlusVal, joystickYPlusMod, 200);
-  }
+  if(joystickXMinusMod == 109){
+    if(analogRead(joystickX) > 486){
+      Mouse.move(mouseSensitivity, 0, 0);
+      delay(1);
+    }
+    if(analogRead(joystickX) < 482){
+      Mouse.move(-(mouseSensitivity), 0, 0);
+      delay(1);
+    }
+    if(analogRead(joystickY) > 530){
+      Mouse.move(0, mouseSensitivity, 0);
+      delay(1);
+    }
+    if(analogRead(joystickY) < 520){
+      Mouse.move(0, -(mouseSensitivity), 0);
+      delay(1);
+    }
 
-  // if(analogRead(joystickX) > 486){
-  //   Mouse.move(mouseSensitivity, 0, 0);
-  //   delay(1);
-  // }
-  // if(analogRead(joystickX) < 482){
-  //   Mouse.move(-(mouseSensitivity), 0, 0);
-  //   delay(1);
-  // }
-  // if(analogRead(joystickY) > 530){
-  //   Mouse.move(0, mouseSensitivity, 0);
-  //   delay(1);
-  // }
-  // if(analogRead(joystickY) < 520){
-  //   Mouse.move(0, -(mouseSensitivity), 0);
-  //   delay(1);
-  // }
-
-  // if(digitalRead(thumbBtn) == LOW){
-  //   Mouse.press(MOUSE_LEFT);
-  //   Mouse.release(MOUSE_LEFT);
-  //   Serial.println("pressed mouse left");
-  //   delay(200);
-  // }
+    if(digitalRead(thumbBtn) == LOW){
+      Mouse.press(MOUSE_LEFT);
+      Mouse.release(MOUSE_LEFT);
+      Serial.println("pressed mouse left");
+      delay(200);
+    }
+  }else{
+    if (analogRead(joystickX) < 460) {
+      pressKey(joystickXMinusVal, joystickXMinusMod, 200);
+    }
+    if (analogRead(joystickX) > 500) {
+      pressKey(joystickXPlusVal, joystickXPlusMod, 200);
+    }
+    if (digitalRead(thumbBtn) == LOW) {
+      pressKey(joystickBtnVal, joystickBtnMod, 200);
+    }
+    if (analogRead(joystickY) > 545) {
+      pressKey(joystickYMinusVal, joystickYMinusMod, 200);
+    }
+    if (analogRead(joystickY) < 505) {
+      pressKey(joystickYPlusVal, joystickYPlusMod, 200);
+    }
+  }
 
   if (digitalRead(rotaryBtn) == LOW) {
     // Mouse.press(MOUSE_RIGHT);
