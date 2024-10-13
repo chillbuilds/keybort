@@ -205,7 +205,7 @@ void loop() {
       if (rotaryCounter >= 2) {
         rotaryCounter = 0;
         if(rotaryMinusMod == 118){
-          Keyboard.press(251);
+          Keyboard.press(128);
           // Keyboard.press(136);
           Keyboard.releaseAll();
         }else{
@@ -217,7 +217,7 @@ void loop() {
       if (rotaryCounter <= -2) {
         rotaryCounter = 0;
         if(rotaryMinusMod == 118){
-          Keyboard.press(250);
+          Keyboard.press(129);
           Keyboard.releaseAll();
         }else{
           pressKey(rotaryMinusVal, rotaryMinusMod, 0);
