@@ -123,10 +123,10 @@ void loop() {
     if (!btnCooldown) {
       if (slidePotState <= slidePotLastState - 100) {
         btnCooldown = true;
-        Keyboard.write(slidePotMinusVal);
+        pressKey(slidePotMinusVal, slidePotMinusMod, 100);
       } else if (slidePotState >= slidePotLastState + 100) {
         btnCooldown = true;
-        Keyboard.write(slidePotPlusVal);
+        pressKey(slidePotPlusVal, slidePotPlusMod, 100);
       }
 
       if (btnCooldown) {
@@ -144,20 +144,20 @@ void loop() {
 
   mouseSensitivity = map(slidePotReading, 0, 1023, 1, 10);
 
-  if(analogRead(joystickX) > 500){
-    pressKey(joystickXMinusVal, joystickXMinusMod);
+  if (analogRead(joystickX) < 460) {
+    pressKey(joystickXMinusVal, joystickXMinusMod, 200);
   }
-  if(analogRead(joystickX) < 460){
-    pressKey(joystickXPlusVal, joystickXPlusMod);
+  if (analogRead(joystickX) > 500) {
+    pressKey(joystickXPlusVal, joystickXPlusMod, 200);
   }
-  if(digitalRead(thumbBtn) == LOW){
-    pressKey(joystickBtnVal, joystickBtnMod);
+  if (digitalRead(thumbBtn) == LOW) {
+    pressKey(joystickBtnVal, joystickBtnMod, 200);
   }
-  if(analogRead(joystickY) > 545){
-    pressKey(joystickYMinusVal, joystickYMinusMod);
+  if (analogRead(joystickY) > 545) {
+    pressKey(joystickYMinusVal, joystickYMinusMod, 200);
   }
-  if(analogRead(joystickY) < 505){
-    pressKey(joystickYPlusVal, joystickYPlusMod);
+  if (analogRead(joystickY) < 505) {
+    pressKey(joystickYPlusVal, joystickYPlusMod, 200);
   }
 
   // if(analogRead(joystickX) > 486){
@@ -187,9 +187,7 @@ void loop() {
   if (digitalRead(rotaryBtn) == LOW) {
     // Mouse.press(MOUSE_RIGHT);
     // Mouse.release(MOUSE_RIGHT);
-    Keyboard.write(rotaryBtnVal);
-    Serial.println("pressed mouse right");
-    delay(300);
+    pressKey(rotaryBtnVal, rotaryBtnMod, 300);
   }
 
   rotaryState = digitalRead(rotaryA);
@@ -198,14 +196,13 @@ void loop() {
       rotaryCounter++;
       if (rotaryCounter >= 2) {
         rotaryCounter = 0;
-        Keyboard.write(rotaryPlusVal);
-        pressKey(rotaryPlusVal, rotaryPlusMod);
+        pressKey(rotaryPlusVal, rotaryPlusMod, 0);
       }
     } else {
       rotaryCounter--;
       if (rotaryCounter < -1) {
         rotaryCounter = 0;
-        pressKey(rotaryMinusVal, rotaryMinusMod);
+        pressKey(rotaryMinusVal, rotaryMinusMod, 0);
       }
     }
     Serial.print("Position: ");
@@ -214,28 +211,28 @@ void loop() {
   rotaryLastState = rotaryState;
 
   if (digitalRead(key1) == LOW) {
-    pressKey(key1Val, key1Mod);
+    pressKey(key1Val, key1Mod, 200);
   }
   if (digitalRead(key2) == LOW) {
-    pressKey(key2Val, key2Mod);
+    pressKey(key2Val, key2Mod, 200);
   }
   if (digitalRead(key3) == LOW) {
-    pressKey(key3Val, key3Mod);
+    pressKey(key3Val, key3Mod, 200);
   }
   if (digitalRead(key4) == LOW) {
-    pressKey(key4Val, key4Mod);
+    pressKey(key4Val, key4Mod, 200);
   }
   if (digitalRead(key5) == LOW) {
-    pressKey(key5Val, key5Mod);
+    pressKey(key5Val, key5Mod, 200);
   }
   if (digitalRead(key6) == LOW) {
-    pressKey(key6Val, key6Mod);
+    pressKey(key6Val, key6Mod, 200);
   }
   if (digitalRead(key7) == LOW) {
-    pressKey(key7Val, key7Mod);
+    pressKey(key7Val, key7Mod, 200);
   }
   if (digitalRead(key8) == LOW) {
-    pressKey(key8Val, key8Mod);
+    pressKey(key8Val, key8Mod, 200);
   }
 }
 
@@ -341,7 +338,7 @@ void serialCheck() {
   }
 }
 
-void pressKey(int keyVal, int keyMod) {
+void pressKey(int keyVal, int keyMod, int keyDelay) {
   if (keyMod == 99) {
     Keyboard.press(KEY_LEFT_CTRL);
     Keyboard.write(keyVal);
@@ -355,5 +352,5 @@ void pressKey(int keyVal, int keyMod) {
     Keyboard.write(keyVal);
   }
   Keyboard.releaseAll();
-  delay(200);
+  delay(keyDelay);
 }

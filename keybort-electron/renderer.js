@@ -33,17 +33,17 @@ $('#rotaryUpdateBtn').on('click', () => {
         if($('#rotaryBtnKey').val()){
             window.api.sendString(`10${$('#rotaryBtnKey').val()}${modifier}\n`)
         }
-    }, 200)
+    }, 100)
     setTimeout(()=>{
         if($('#rotaryRightKey').val()){
             window.api.sendString(`11${$('#rotaryRightKey').val()}${modifier}\n`)
         }
-    }, 400)
+    }, 200)
     setTimeout(()=>{
         $('#rotaryLeftKey').val('')
         $('#rotaryBtnKey').val('')
         $('#rotaryRightKey').val('')
-    }, 600)
+    }, 300)
     $('#popup').attr('style', 'display:none;')
     $('#pageShade').attr('style', 'display:none;')
     $('#rotaryUpdate').attr('style', 'display:none;')
@@ -63,27 +63,27 @@ $('#joystickUpdateBtn').on('click', () => {
         if($('#joystickXMinusKey').val()){
             window.api.sendString(`12${$('#joystickXMinusKey').val()}${modifier}\n`)
         }
-    }, 200)
+    }, 100)
     setTimeout(()=>{
         if($('#joystickXPlusKey').val()){
             window.api.sendString(`13${$('#joystickXPlusKey').val()}${modifier}\n`)
         }
-    }, 400)
+    }, 200)
     setTimeout(()=>{
         if($('#joystickBtnKey').val()){
             window.api.sendString(`14${$('#joystickBtnKey').val()}${modifier}\n`)
         }
-    }, 600)
+    }, 300)
     setTimeout(()=>{
         if($('#joystickYMinusKey').val()){
             window.api.sendString(`15${$('#joystickYMinusKey').val()}${modifier}\n`)
         }
-    }, 800)
+    }, 400)
     setTimeout(()=>{
         if($('#joystickYPlusKey').val()){
             window.api.sendString(`16${$('#joystickYPlusKey').val()}${modifier}\n`)
         }
-    }, 1000)
+    }, 5000)
     $('#popup').attr('style', 'display:none;')
     $('#pageShade').attr('style', 'display:none;')
     $('#joystickUpdate').attr('style', 'display:none;')
@@ -93,21 +93,29 @@ $('#joystickUpdateBtn').on('click', () => {
 $('#slidePotUpdateBtn').on('click', () => {
     // eeprom addresses
     // 17, 18
+    let modifier = $('input[name="modifier"]:checked').val()
+    if(modifier){
+        modifier = modifier.split('').shift()
+    }else{
+        modifier = '/'
+    }
     setTimeout(()=>{
         if($('#slidePotLeftKey').val()){
-            window.api.sendString(`17${$('#slidePotLeftKey').val()}sh\n`)
+            window.api.sendString(`17${$('#slidePotLeftKey').val()}${modifier}\n`)
+        }
+    }, 100)
+    setTimeout(()=>{
+        if($('#slidePotRightKey').val()){
+            window.api.sendString(`18${$('#slidePotRightKey').val()}${modifier}\n`)
         }
     }, 200)
     setTimeout(()=>{
-        if($('#slidePotRightKey').val()){
-            window.api.sendString(`18${$('#slidePotRightKey').val()}sh\n`)
-        }
-    }, 400)
+        $('#slidePotLeftKey').val('')
+        $('#slidePotRightKey').val('')
+    },300)
     $('#popup').attr('style', 'display:none;')
     $('#pageShade').attr('style', 'display:none;')
     $('#slidePotUpdate').attr('style', 'display:none;')
-    $('#slidePotLeftKey').val('')
-    $('#slidePotRightKey').val('')
     $('input[type="checkbox"]').prop('checked', false)
 })
   
