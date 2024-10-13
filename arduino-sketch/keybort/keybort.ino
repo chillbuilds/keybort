@@ -144,8 +144,6 @@ void loop() {
 
   mouseSensitivity = map(slidePotReading, 0, 1023, 1, 10);
 
-  Serial.println(analogRead(joystickY));
-  delay(200);
   if(analogRead(joystickX) > 500){
     pressKey(joystickXMinusVal, joystickXMinusMod);
   }
