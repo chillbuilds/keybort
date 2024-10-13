@@ -12,6 +12,11 @@ input {
     padding: 2px;
 }
 
+input[type="checkbox"] {
+    border-radius: 8px;
+    background: black;
+}
+
 #buttons {
     position: absolute;
     top: 0;

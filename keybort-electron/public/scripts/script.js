@@ -52,3 +52,21 @@ $('#popupClose').on('click', () => {
     $('#slidePotRightKey').val('')
     $('#keySpriteSrc').attr('src', `./public/images/key-sprites/keybort-sprite.png`)
 })
+
+$('input[type="checkbox"]').on('click', function(e){
+    e.preventDefault()
+})
+
+$('input[type="checkbox"]').mouseup(function(e) {
+    const radio = $(e.target)
+    if(radio.is(':checked')){
+        $('input[type="checkbox"]').prop('checked', false)
+                    // $this.prop('checked', true);
+        // // Prevent the default action of checking the radio button
+        // // Uncheck the radio button
+        // radio.prop('checked', false)
+    }else{
+        $('input[type="checkbox"]').prop('checked', false)
+        radio.prop('checked', true)
+    }
+})

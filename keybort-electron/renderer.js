@@ -8,7 +8,6 @@ $('#keyUpdateBtn').on('click', () => {
     }else{
         modifier = '/'
     }
-    console.log(modifier)
     window.api.sendString(`${eepromAddress}${keystroke}${modifier}\n`)
     $('#popup').attr('style', 'display:none;')
     $('#pageShade').attr('style', 'display:none;')
