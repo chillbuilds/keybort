@@ -127,7 +127,15 @@ $('.mouseMode').on('click', function(){
     $('#slidePotUpdate').attr('style', 'display:none;')
     $('input[type="checkbox"]').prop('checked', false)
 })
-  
+
+$('.volumeMode').on('click', function(){
+    window.api.sendString(`09/v\n`)
+    $('#popup').attr('style', 'display:none;')
+    $('#pageShade').attr('style', 'display:none;')
+    $('#rotaryUpdate').attr('style', 'display:none;')
+    $('input[type="checkbox"]').prop('checked', false)
+})
+
 // Listen for the response from the main process
 window.api.onStringResponse((response) => {
 console.log('Response from main process:', response)

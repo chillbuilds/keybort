@@ -175,24 +175,24 @@ void loop() {
       delay(200);
     }
   }else{
-    if (analogRead(joystickX) < 460) {
+    if (analogRead(joystickX) < 460){
       pressKey(joystickXMinusVal, joystickXMinusMod, 200);
     }
-    if (analogRead(joystickX) > 500) {
+    if (analogRead(joystickX) > 500){
       pressKey(joystickXPlusVal, joystickXPlusMod, 200);
     }
-    if (digitalRead(thumbBtn) == LOW) {
+    if(digitalRead(thumbBtn) == LOW){
       pressKey(joystickBtnVal, joystickBtnMod, 200);
     }
-    if (analogRead(joystickY) > 545) {
+    if(analogRead(joystickY) > 545){
       pressKey(joystickYMinusVal, joystickYMinusMod, 200);
     }
-    if (analogRead(joystickY) < 505) {
+    if(analogRead(joystickY) < 505){
       pressKey(joystickYPlusVal, joystickYPlusMod, 200);
     }
   }
 
-  if (digitalRead(rotaryBtn) == LOW) {
+  if(digitalRead(rotaryBtn) == LOW){
     // Mouse.press(MOUSE_RIGHT);
     // Mouse.release(MOUSE_RIGHT);
     pressKey(rotaryBtnVal, rotaryBtnMod, 300);
@@ -204,12 +204,24 @@ void loop() {
       rotaryCounter++;
       if (rotaryCounter >= 2) {
         rotaryCounter = 0;
-        pressKey(rotaryPlusVal, rotaryPlusMod, 0);
+        if(rotaryMinusMod == 118){
+          Keyboard.press(251);
+          // Keyboard.press(136);
+          Keyboard.releaseAll();
+        }else{
+          pressKey(rotaryPlusVal, rotaryPlusMod, 0);
+        }
       }
     } else {
       rotaryCounter--;
-      if (rotaryCounter < -1) {
+      if (rotaryCounter <= -2) {
         rotaryCounter = 0;
+        if(rotaryMinusMod == 118){
+          Keyboard.press(250);
+          Keyboard.releaseAll();
+        }else{
+          pressKey(rotaryMinusVal, rotaryMinusMod, 0);
+        }
         pressKey(rotaryMinusVal, rotaryMinusMod, 0);
       }
     }
