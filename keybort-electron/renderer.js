@@ -19,17 +19,23 @@ $('#keyUpdateBtn').on('click', () => {
 $('#rotaryUpdateBtn').on('click', () => {
     // eeprom addresses
     // 9, 10, 11
+    let modifier = $('input[name="modifier"]:checked').val()
+    if(modifier){
+        modifier = modifier.split('').shift()
+    }else{
+        modifier = '/'
+    }
     if($('#rotaryLeftKey').val()){
-        window.api.sendString(`09${$('#rotaryLeftKey').val()}sh\n`)
+        window.api.sendString(`09${$('#rotaryLeftKey').val()}${modifier}\n`)
     }
     setTimeout(()=>{
         if($('#rotaryBtnKey').val()){
-            window.api.sendString(`10${$('#rotaryBtnKey').val()}sh\n`)
+            window.api.sendString(`10${$('#rotaryBtnKey').val()}${modifier}\n`)
         }
     }, 200)
     setTimeout(()=>{
         if($('#rotaryRightKey').val()){
-            window.api.sendString(`11${$('#rotaryRightKey').val()}sh\n`)
+            window.api.sendString(`11${$('#rotaryRightKey').val()}${modifier}\n`)
         }
     }, 400)
     setTimeout(()=>{

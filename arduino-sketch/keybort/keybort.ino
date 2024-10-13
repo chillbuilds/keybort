@@ -204,12 +204,13 @@ void loop() {
     if(rotaryCounter >= 2){
       rotaryCounter = 0;
       Keyboard.write(rotaryPlusVal);
+      pressKey(rotaryPlusVal, rotaryPlusMod);
     }
   } else {
     rotaryCounter --;
     if(rotaryCounter < -1){
       rotaryCounter = 0;
-      Keyboard.write(rotaryMinusVal);
+      pressKey(rotaryMinusVal, rotaryMinusMod);
     }
   }
   Serial.print("Position: ");
