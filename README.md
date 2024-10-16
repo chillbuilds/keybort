@@ -1,5 +1,10 @@
 # what is keybort?
-keybort is a 3d printed macro keyboard that works with a local electron app for key updates.
+keybort is a 3d printed macro keyboard that works with a local app to make key updates. keys and key modifiers are saved to the arduino's eeprom for persistence  
+
+built with
+* arduino ide
+* nodejs
+* electron
 
 # pinout
 
