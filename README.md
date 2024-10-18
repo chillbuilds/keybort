@@ -17,11 +17,17 @@ built with
 * 1x arduino pro micro
 * ~26 awg solid wire
 * ~26 awg stranded wire
+* 1x pcb/perfboard - ?
 * adhesive (ca glue, 2 part epoxy, etc)
 * 2mm heat shrink tubing (optional)
+
 
 # required tools
 * 3d printer
 * soldering iron
 
-# assembly guide
+# assembly guide (needs pics)
+* print the things
+* embed threaded inserts
+* glue keys into housing
+* cut pcb 

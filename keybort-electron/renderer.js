@@ -1,3 +1,5 @@
+window.api.sendString('send port')
+
 $('#keyUpdateBtn').on('click', () => {
     // eeprom addresses
     // 1 - 8

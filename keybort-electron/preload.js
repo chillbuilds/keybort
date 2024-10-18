@@ -6,6 +6,7 @@
  *
  * https://www.electronjs.org/docs/latest/tutorial/sandbox
  */
+
 window.addEventListener('DOMContentLoaded', () => {
   const replaceText = (selector, text) => {
     const element = document.getElementById(selector)
@@ -22,4 +23,10 @@ const { contextBridge, ipcRenderer } = require('electron')
 contextBridge.exposeInMainWorld('api', {
   sendString: (str) => ipcRenderer.send('send-string', str),
   onStringResponse: (callback) => ipcRenderer.on('string-response', (event, response) => callback(response))
+})
+
+ipcRenderer.on('portName', (event, data) => {
+  document.getElementById('arduino').textContent = `arduino found on ${data}`
+  
+  console.log('port name: ', data)
 })

@@ -1,4 +1,7 @@
 const SerialPort = require('serialport').SerialPort;
+const { app, BrowserWindow, ipcMain } = require('electron')
+const path = require('node:path')
+let mainWindow;
 
 let portName;
 
@@ -33,29 +36,9 @@ let sendData = (data) => {
   })
 }
 
-async function listSerialPorts() {
-  try {
-    const ports = await SerialPort.list();
-    ports.forEach(port => {
-      if(port.manufacturer.toLowerCase().includes("arduino")){
-        portName = port.path
-        console.log('updated port name')
-      }
-    })
-  } catch (err) {
-    console.error('Error listing serial ports:', err.message)
-  }
-}
-
-listSerialPorts()
-
-// Modules to control application life and create native browser window
-const { app, BrowserWindow, ipcMain } = require('electron')
-const path = require('node:path')
-
 function createWindow () {
   // Create the browser window.
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 574,
     height: 500,
     webPreferences: {
@@ -75,8 +58,8 @@ function createWindow () {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
+  listSerialPorts()
   createWindow()
-
   app.on('activate', function () {
     // On macOS it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
@@ -92,10 +75,29 @@ app.on('window-all-closed', function () {
 })
 
 ipcMain.on('send-string', (event, str) => {
-    sendData(str)
+    if(str == 'send port'){
+      listSerialPorts()
+    }
+    else{
+      sendData(str)
+    }
     console.log('Received string:', str)
     
     // You can process the string here, then send a response
     const response = `Processed: ${str}`
     event.reply('string-response', response)
 })
+
+async function listSerialPorts() {
+  try {
+    const ports = await SerialPort.list();
+    ports.forEach(port => {
+      if(port.manufacturer.toLowerCase().includes("arduino")){
+        portName = port.path
+        mainWindow.webContents.send('portName', portName);
+      }
+    })
+  } catch (err) {
+    console.error('Error listing serial ports:', err.message)
+  }
+}
