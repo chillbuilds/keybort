@@ -26,7 +26,11 @@ contextBridge.exposeInMainWorld('api', {
 })
 
 ipcRenderer.on('portName', (event, data) => {
-  document.getElementById('arduino').textContent = `arduino found on ${data}`
+  document.getElementById('arduino').textContent = `arduino port: ${data}`
   
   console.log('port name: ', data)
+})
+
+ipcRenderer.on('noPort', (event, data) => {
+  document.getElementById('arduino').textContent = `arduino not found`
 })

@@ -1,10 +1,4 @@
-stuff to do:
+# to do
 
-add modifier functionality
-add volume and mouse modes
-
-stuff to add:
-
-pinout
-parts list
-assembly guide
+* move localstorage setItem key updates to icpmain function (only update app after arduino writes new key value)
+ 

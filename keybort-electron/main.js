@@ -3,7 +3,7 @@ const { app, BrowserWindow, ipcMain } = require('electron')
 const path = require('node:path')
 let mainWindow;
 
-let portName;
+let portName = ''
 
 let sendData = (data) => {
   const port = new SerialPort({ path: portName, baudRate: 9600 })
@@ -82,21 +82,21 @@ ipcMain.on('send-string', (event, str) => {
       sendData(str)
     }
     console.log('Received string:', str)
-    
-    // You can process the string here, then send a response
-    const response = `Processed: ${str}`
-    event.reply('string-response', response)
 })
 
 async function listSerialPorts() {
   try {
     const ports = await SerialPort.list();
+    portName = ''
     ports.forEach(port => {
       if(port.manufacturer.toLowerCase().includes("arduino")){
         portName = port.path
-        mainWindow.webContents.send('portName', portName);
+        mainWindow.webContents.send('portName', portName)
       }
     })
+    if(portName == ''){
+      mainWindow.webContents.send('noPort')
+    }
   } catch (err) {
     console.error('Error listing serial ports:', err.message)
   }
