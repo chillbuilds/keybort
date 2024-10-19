@@ -1,37 +1,6 @@
 let eepromAddress;
 let key;
 
-if(localStorage.length > 0){
-    $('#presetList').text('')
-    for (let i = 0; i < localStorage.length; i++) {
-        const key = localStorage.key(i)
-        const value = localStorage.getItem(key)
-        console.log(`${key}: ${value}`)
-        let lineStyling = ''
-        if(i % 2 != 0){
-            lineStyling = ' background:rgba(255,255,255,0.2); '
-        }
-        $('#presetList').append(`
-            <div style="cursor:pointer; height:22px; ${lineStyling}">
-                <div class="preset floatLeft" id="key-${key}" value="${value}" style="width:160px; padding:2px; padding-left: 4px;">
-                    ${key}
-                </div>
-                <div class="presetDelete floatRight" ref="key-${key}" style="margin-right:6px;">
-                    x
-                </div>
-            </div>
-        `)
-    }
-    $('.preset').on('click', function(){
-        console.log('click da preset')
-    })
-    $('.presetDelete').on('click', function(){
-        console.log($(this).attr('ref'))
-    })
-}else{
-    $('#presetList').text('no presets found')
-}
-
 $('.key').on('click', function() {
     if($(this).attr('id') == 'key9'){
         // eepromAddress = `09`
@@ -88,12 +57,6 @@ $('#popupClose').on('click', () => {
 $('#presetClose').on('click', function(){
     $('#pageShade').attr('style', 'display:none;')
     $('#presetPopup').attr('style', 'display:none')
-})
-
-$('#presets').on('click', function(){
-    $('#pageShade').attr('style', 'display:inline-block;')
-    $('#presetPopup').attr('style', 'display:inline-block')
-    $('#presetName').focus()
 })
 
 $('.deleteKeyMap').on('click', function(){

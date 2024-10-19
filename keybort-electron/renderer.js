@@ -154,6 +154,13 @@ $('#portRefresh').on('click', function(){
     window.api.sendString('send port')
 })
 
+$('#presets').on('click', function(){
+    $('#pageShade').attr('style', 'display:inline-block;')
+    $('#presetPopup').attr('style', 'display:inline-block')
+    $('#presetName').focus()
+    window.api.updatePresetList()
+})
+
 $('#savePreset').on('click', function(){
     if($('#presetName').val()){
         $('#pageShade').attr('style', 'display:none;')
@@ -170,3 +177,5 @@ window.api.onStringResponse((response) => {
 console.log('Response from main process:', response)
 // You can update the UI with the response here
 })
+
+window.api.updatePresetList()
