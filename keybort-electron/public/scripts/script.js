@@ -77,6 +77,10 @@ $('#save').on('click', function(){
     }
 })
 
+$('.deleteKeyMap').on('click', function(){
+    alert('delete key map')
+})
+
 $('input[type="checkbox"]').on('click', function(e){
     e.preventDefault()
 })
