@@ -19,10 +19,21 @@ let sendData = (data) => {
     })
   
     port.on('data', (data) => {
-        console.log(data.toString())
+      console.log(data.toString())
       if(data.toString().includes("key updated")){
         console.log('updated key')
         port.close((err) => {
+          console.log('port closed')
+          if (err) {
+            return console.error('Error closing port:', err.message)
+          }
+        })
+      }
+      if(data.toString().includes("keys:")){
+        let keyArr = data.toString().split('keys:').join('').split('\r\n').join('').split(',')
+        mainWindow.webContents.send('keyMaps', keyArr)
+        port.close((err) => {
+          console.log('port closed')
           if (err) {
             return console.error('Error closing port:', err.message)
           }
@@ -51,7 +62,7 @@ function createWindow () {
   mainWindow.loadFile('index.html')
 
   // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
 }
 
 // This method will be called when Electron has finished
@@ -77,6 +88,8 @@ app.on('window-all-closed', function () {
 ipcMain.on('send-string', (event, str) => {
     if(str == 'send port'){
       listSerialPorts()
+    }else if(str == 'send keys'){
+      sendData(str + '\n')
     }
     else{
       sendData(str)

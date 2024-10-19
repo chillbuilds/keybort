@@ -154,6 +154,17 @@ $('#portRefresh').on('click', function(){
     window.api.sendString('send port')
 })
 
+$('#savePreset').on('click', function(){
+    if($('#presetName').val()){
+        $('#pageShade').attr('style', 'display:none;')
+        $('#presetPopup').attr('style', 'display:none')
+        window.api.sendString('send keys')
+    }else{
+        $('#presetName').focus()
+        console.log('preset name is blank')
+    }
+})
+
 // Listen for the response from the main process
 window.api.onStringResponse((response) => {
 console.log('Response from main process:', response)

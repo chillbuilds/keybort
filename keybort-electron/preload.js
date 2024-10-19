@@ -1,11 +1,3 @@
-/**
- * The preload script runs before `index.html` is loaded
- * in the renderer. It has access to web APIs as well as
- * Electron's renderer process modules and some polyfilled
- * Node.js functions.
- *
- * https://www.electronjs.org/docs/latest/tutorial/sandbox
- */
 
 window.addEventListener('DOMContentLoaded', () => {
   const replaceText = (selector, text) => {
@@ -33,4 +25,49 @@ ipcRenderer.on('portName', (event, data) => {
 
 ipcRenderer.on('noPort', (event, data) => {
   document.getElementById('arduino').textContent = `arduino not found`
+})
+
+ipcRenderer.on('keyMaps', (event, data) => {
+  let presetName = document.getElementById('presetName').value
+  localStorage.setItem(presetName, JSON.stringify(data))
+  
+  const presetList = document.getElementById('presetList');
+
+  if (localStorage.length > 0) {
+      presetList.textContent = '';
+
+      for (let i = 0; i < localStorage.length; i++) {
+          const key = localStorage.key(i)
+          const value = localStorage.getItem(key)
+          console.log(`${key}: ${value}`)
+          
+          let lineStyling = ''
+          if (i % 2 !== 0) {
+              lineStyling = ' background:rgba(255,255,255,0.2); '
+          }
+
+          const divElement = document.createElement('div');
+          divElement.style.cssText = `cursor:pointer; height:22px; ${lineStyling}`
+
+          const keyDiv = document.createElement('div')
+          keyDiv.classList.add('floatLeft')
+          keyDiv.style.cssText = 'width:160px; padding:2px; padding-left: 4px;'
+          keyDiv.textContent = key
+
+          const valueDiv = document.createElement('div')
+          valueDiv.classList.add('floatRight', 'deleteKeyMap')
+          valueDiv.setAttribute('value', value)
+          valueDiv.style.cssText = 'margin-right:6px;'
+          valueDiv.textContent = 'x'
+
+          divElement.appendChild(keyDiv)
+          divElement.appendChild(valueDiv)
+
+          presetList.appendChild(divElement)
+      }
+    } else {
+        presetList.textContent = 'no presets found'
+    }
+
+  presetName.value = ''
 })
