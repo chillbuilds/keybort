@@ -62,6 +62,19 @@ $('#presetClose').on('click', function(){
 $('#presets').on('click', function(){
     $('#pageShade').attr('style', 'display:inline-block;')
     $('#presetPopup').attr('style', 'display:inline-block')
+    $('#presetName').focus()
+})
+
+$('#save').on('click', function(){
+    console.log($('#presetName').val())
+    if($('#presetName').val()){
+        $('#pageShade').attr('style', 'display:none;')
+        $('#presetPopup').attr('style', 'display:none')
+        console.log('get key mappings from arduino, and save them to local storage w/preset name: ' + $('#presetName').val())
+        $('#presetName').val('')
+    }else{
+        alert('preset name is blank')
+    }
 })
 
 $('input[type="checkbox"]').on('click', function(e){

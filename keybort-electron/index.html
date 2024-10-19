@@ -10,19 +10,30 @@
   </head>
   <body>
 
-    <div style="position:fixed; left: 0px; display:none;" id="presetPopup">
+    <div id="presetPopup">
         <div id="presetClose" style="position:absolute; right:0; padding: 4px; cursor:pointer; font-weight:bold;">X</div>
         
-        <div id="saveContainer">
+        <div id="saveContainer" style="width:200px; left:0px; margin-left: 44px;">
+            <span class="floatLeft" style="left:4px; margin-top:12px; margin-bottom:8px;">save current key map:</span>
             <div class="floatLeft" style="padding:4px;">
-                <input type="input" placeholder="preset name">
+                <input id="presetName" style="width:156px;" type="input" placeholder="preset name">
             </div>
-            <div class="floatLeft" style="padding:4px; cursor:pointer;">
+            <div class="floatLeft" id="save" style="padding:4px; cursor:pointer; top:-2px;">
                 <img width="24px" src="./public/images/save.png">
             </div>
         </div>
         
-        <div style="width:70%; margin-left:15%; margin-top:44px; margin-bottom:12px; border-bottom: 4px solid rgba(0, 0, 0, 0.1);"></div>
+        <div style="width:80%; margin-left:10%; margin-top:76px; margin-bottom:12px; border-bottom: 4px solid rgba(0, 0, 0, 0.1);"></div>
+
+        <div id="loadContainer" style="width:200px; left:0px; margin-left: 44px;">
+            <span class="floatLeft" style="left:4px; margin-top:0px; margin-bottom:12px;">load key map:</span>
+            <div class="floatLeft" id="presetList" style="overflow-y:scroll; width: 200px; left:4px; height: 92px; background:rgba(255, 255, 255, 0.2); border:1px solid rgba(0, 0, 0, 0.1);">
+                <div style="">test</div>
+                <div style="">piskel</div>
+                <div style="">illustrator</div>
+                <div style="">fusion 360</div>
+            </div>
+        </div>
     </div>
 
     <div id="popup">

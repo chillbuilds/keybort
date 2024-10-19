@@ -60,10 +60,10 @@ input[type="checkbox"] {
 }
 
 #presetPopup {
-    display:none;
+    /* display:none; */
     position: fixed;
     background: #8F95D3;
-    width: 287px;
+    width: 288px;
     height: 230px;
     margin-left: 144px;
     margin-top: 50px;
