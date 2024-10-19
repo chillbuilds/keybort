@@ -54,6 +54,16 @@ $('#popupClose').on('click', () => {
     $('input[type="checkbox"]').prop('checked', false)
 })
 
+$('#presetClose').on('click', function(){
+    $('#pageShade').attr('style', 'display:none;')
+    $('#presetPopup').attr('style', 'display:none')
+})
+
+$('#presets').on('click', function(){
+    $('#pageShade').attr('style', 'display:inline-block;')
+    $('#presetPopup').attr('style', 'display:inline-block')
+})
+
 $('input[type="checkbox"]').on('click', function(e){
     e.preventDefault()
 })

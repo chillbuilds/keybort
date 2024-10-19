@@ -57,7 +57,18 @@ input[type="checkbox"] {
     z-index: 1000;
     border-radius: 2px;
     border: 4px solid rgba(0, 0, 0, 0.1);
-    /* border-bottom: 4px solid rgba(0, 0, 0, 0.2); */
+}
+
+#presetPopup {
+    display:none;
+    position: fixed;
+    background: #8F95D3;
+    width: 287px;
+    height: 230px;
+    margin-left: 144px;
+    margin-top: 50px;
+    z-index: 1001;
+    border: 4px solid rgba(0, 0, 0, 0.1);
 }
 
 #pageShade {
@@ -69,4 +80,9 @@ input[type="checkbox"] {
     top: 0;
     z-index: 999;
     background: rgba(0, 0, 0, 0.4);
+}
+
+.floatLeft {
+    position: relative;
+    float: left;
 }

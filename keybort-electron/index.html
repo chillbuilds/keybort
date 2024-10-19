@@ -10,6 +10,21 @@
   </head>
   <body>
 
+    <div style="position:fixed; left: 0px; display:none;" id="presetPopup">
+        <div id="presetClose" style="position:absolute; right:0; padding: 4px; cursor:pointer; font-weight:bold;">X</div>
+        
+        <div id="saveContainer">
+            <div class="floatLeft" style="padding:4px;">
+                <input type="input" placeholder="preset name">
+            </div>
+            <div class="floatLeft" style="padding:4px; cursor:pointer;">
+                <img width="24px" src="./public/images/save.png">
+            </div>
+        </div>
+        
+        <div style="width:70%; margin-left:15%; margin-top:44px; margin-bottom:12px; border-bottom: 4px solid rgba(0, 0, 0, 0.1);"></div>
+    </div>
+
     <div id="popup">
         <div id="popupClose" style="position:absolute; right:0; padding: 4px; cursor:pointer; font-weight:bold;">X</div>
         <div id="keyUpdate" style="display:none;">
@@ -26,12 +41,12 @@
                 <div style="width:fit-content; font-weight: bold; margin-bottom:10px; margin-left:2px;">
                     modifier:
                 </div>
-                <div style="position:relative; float:left; margin-top:-1px;"><input type="checkbox" id="ctrlKeyMod" name="modifier" value="ctrl"></div>
-                <div style="position:relative; float:left; margin-right:2px;">ctrl</div>
-                <div style="position:relative; float:left; margin-top:-1px;"><input type="checkbox" id="altKeyMod" name="modifier" value="alt"></div>
-                <div style="position:relative; float:left; margin-right:2px;">alt</div>
-                <div style="position:relative; float:left; margin-top:-1px;"><input type="checkbox" id="shiftKeyMod" name="modifier" value="shft"></div>
-                <div style="position:relative; float:left; margin-right:2px;">shift</div>
+                <div class="floatLeft" style="margin-top:-1px;"><input type="checkbox" id="ctrlKeyMod" name="modifier" value="ctrl"></div>
+                <div class="floatLeft" style="margin-right:2px;">ctrl</div>
+                <div class="floatLeft" style="margin-top:-1px;"><input type="checkbox" id="altKeyMod" name="modifier" value="alt"></div>
+                <div class="floatLeft" style="margin-right:2px;">alt</div>
+                <div class="floatLeft" style="margin-top:-1px;"><input type="checkbox" id="shiftKeyMod" name="modifier" value="shft"></div>
+                <div class="floatLeft" style="margin-right:2px;">shift</div>
             </div>
             <div class="update button" id="keyUpdateBtn" style="position:absolute; bottom:6px; right:6px;">update</div>
         </div>
@@ -41,15 +56,15 @@
                 <div class="volumeMode button" style="text-align:center; width:92px; margin-left:92px; margin-top:12px;">volume mode</div>
             </div>
             <div style="width:270px; margin-left:16px; margin-top:42px;">
-                <div style="padding:8px; position:relative; float:left;">
+                <div class="floatLeft" style="padding:8px;">
                     <img style="width:68px;" src="./public/images/rotary-knob.png"><br>
                     <input id="rotaryLeftKey" placeholder="left" style="width:64px; margin-top:8px;">
                 </div>
-                <div style="padding:8px; position:relative; float:left;">
+                <div class="floatLeft" style="padding:8px;">
                     <img style="width:68px;" src="./public/images/rotary-knob-side.png"><br>
                     <input id="rotaryBtnKey" placeholder="click" style="width:64px; margin-top:8px;">
                 </div>
-                <div style="padding:8px; position:relative; float:left;">
+                <div class="floatLeft" style="padding:8px;">
                     <img style="width:68px; transform: scaleX(-1);" src="./public/images/rotary-knob.png"><br>
                     <input id="rotaryRightKey" placeholder="right" style="width:64px; margin-top:8px;">
                 </div>
@@ -59,12 +74,12 @@
                 <div style="font-weight: bold; margin-bottom:6px; margin-left:4px;">
                     modifier:
                 </div>
-                <div style="position:relative; float:left; margin-top:-1px;"><input type="checkbox" id="ctrlRotaryMod" name="modifier" value="ctrl"></div>
-                <div style="position:relative; float:left; margin-right:2px;">ctrl</div>
-                <div style="position:relative; float:left; margin-top:-1px;"><input type="checkbox" id="altRotaryMod" name="modifier" value="alt"></div>
-                <div style="position:relative; float:left; margin-right:2px;">alt</div>
-                <div style="position:relative; float:left; margin-top:-1px;"><input type="checkbox" id="shiftRotaryMod" name="modifier" value="shift"></div>
-                <div style="position:relative; float:left; margin-right:2px;">shift</div>
+                <div class="floatLeft" style="margin-top:-1px;"><input type="checkbox" id="ctrlRotaryMod" name="modifier" value="ctrl"></div>
+                <div class="floatLeft" style="margin-right:2px;">ctrl</div>
+                <div class="floatLeft" style="margin-top:-1px;"><input type="checkbox" id="altRotaryMod" name="modifier" value="alt"></div>
+                <div class="floatLeft" style="margin-right:2px;">alt</div>
+                <div class="floatLeft" style="margin-top:-1px;"><input type="checkbox" id="shiftRotaryMod" name="modifier" value="shift"></div>
+                <div class="floatLeft" style="margin-right:2px;">shift</div>
             </div>
             <div class="update button" id="rotaryUpdateBtn" style="position:absolute; bottom:6px; right:6px;">update</div>
         </div>
@@ -76,16 +91,16 @@
                 </div>
             </div>
             <div style="width:270px; margin-left:16px; margin-top:42px;">
-                <div style="padding:8px; position:relative; float:left;">
+                <div class="floatLeft" style="padding:8px;">
                     <img style="width:68px;" src="./public/images/joystick-front-x.png"><br>
                     <input id="joystickXMinusKey" placeholder="x-" style="width:32px; margin-top:8px;">
                     <input id="joystickXPlusKey" placeholder="x+" style="width:32px; margin-top:8px;">
                 </div>
-                <div style="padding:8px; position:relative; float:left;">
+                <div class="floatLeft" style="padding:8px;">
                     <img style="width:68px;" src="./public/images/joystick-button.png"><br>
                     <input id="joystickBtnKey" placeholder="click" style="width:64px; margin-top:8px;">
                 </div>
-                <div style="padding:8px; position:relative; float:left;">
+                <div class="floatLeft" style="padding:8px;">
                     <img style="width:68px;" src="./public/images/joystick-front-y.png"><br>
                     <input id="joystickYMinusKey" placeholder="y-" style="width:32px; margin-top:8px;">
                     <input id="joystickYPlusKey" placeholder="y+" style="width:32px; margin-top:8px;">
@@ -96,12 +111,12 @@
                 <div style="font-weight: bold; margin-bottom:6px; margin-left:4px;">
                     modifier:
                 </div>
-                <div style="position:relative; float:left; margin-top:-1px;"><input type="checkbox" id="ctrlJoystickMod" name="modifier" value="ctrl"></div>
-                <div style="position:relative; float:left; margin-right:2px;">ctrl</div>
-                <div style="position:relative; float:left; margin-top:-1px;"><input type="checkbox" id="altJoystickMod" name="modifier" value="alt"></div>
-                <div style="position:relative; float:left; margin-right:2px;">alt</div>
-                <div style="position:relative; float:left; margin-top:-1px;"><input type="checkbox" id="shiftJoystickMod" name="modifier" value="shift"></div>
-                <div style="position:relative; float:left; margin-right:2px;">shift</div>
+                <div class="floatLeft" style="margin-top:-1px;"><input type="checkbox" id="ctrlJoystickMod" name="modifier" value="ctrl"></div>
+                <div class="floatLeft" style="margin-right:2px;">ctrl</div>
+                <div class="floatLeft" style="margin-top:-1px;"><input type="checkbox" id="altJoystickMod" name="modifier" value="alt"></div>
+                <div class="floatLeft" style="margin-right:2px;">alt</div>
+                <div class="floatLeft" style="margin-top:-1px;"><input type="checkbox" id="shiftJoystickMod" name="modifier" value="shift"></div>
+                <div class="floatLeft" style="margin-right:2px;">shift</div>
             </div>
             <div class="update button" id="joystickUpdateBtn" style="position:absolute; bottom:6px; right:6px;">update</div>
         </div>
@@ -113,7 +128,7 @@
                 </div>
             </div>
             <div style="width:270px; margin-left:34px; margin-top:42px;">
-                <div style="padding:8px; position:relative; float:left;">
+                <div class="floatLeft" style="padding:8px;">
                     <img style="width:204px;" src="./public/images/slide-pot.png"><br>
                     <input id="slidePotLeftKey" placeholder="left" style="width:64px; margin-top:8px;">
                     <input id="slidePotRightKey" placeholder="right" style="width:64px; margin-top:8px; position:relative; float:right;">
@@ -124,12 +139,12 @@
                 <div style="font-weight: bold; margin-bottom:6px; margin-left:4px;">
                     modifier:
                 </div>
-                <div style="position:relative; float:left; margin-top:-1px;"><input type="checkbox" id="ctrlSlidePotMod" name="modifier" value="ctrl"></div>
-                <div style="position:relative; float:left; margin-right:2px;">ctrl</div>
-                <div style="position:relative; float:left; margin-top:-1px;"><input type="checkbox" id="altSlidePotMod" name="modifier" value="alt"></div>
-                <div style="position:relative; float:left; margin-right:2px;">alt</div>
-                <div style="position:relative; float:left; margin-top:-1px;"><input type="checkbox" id="shiftSlidePotMod" name="modifier" value="shift"></div>
-                <div style="position:relative; float:left; margin-right:2px;">shift</div>
+                <div class="floatLeft" style="margin-top:-1px;"><input type="checkbox" id="ctrlSlidePotMod" name="modifier" value="ctrl"></div>
+                <div class="floatLeft" style="margin-right:2px;">ctrl</div>
+                <div class="floatLeft" style="margin-top:-1px;"><input type="checkbox" id="altSlidePotMod" name="modifier" value="alt"></div>
+                <div class="floatLeft" style="margin-right:2px;">alt</div>
+                <div class="floatLeft" style="margin-top:-1px;"><input type="checkbox" id="shiftSlidePotMod" name="modifier" value="shift"></div>
+                <div class="floatLeft" style="margin-right:2px;">shift</div>
             </div>
             <div class="update button" id="slidePotUpdateBtn" style="position:absolute; bottom:6px; right:6px;">update</div>
         </div>
@@ -155,24 +170,18 @@
 
     </div>
 
-    <div style="height:26px; position:relative; float:left; margin-left:40px; padding:4px; background:rgba(255, 255, 255, 0.2);">
-        <div style="position:relative; float:left; top:5px; margin-left:2px;" id="arduino">
+    <div class="floatLeft" style="height:26px; margin-left:40px; padding:4px; background:rgba(255, 255, 255, 0.2);">
+        <div class="floatLeft" style="top:5px; margin-left:2px;" id="arduino">
             arduino not found
         </div>
-        <div id="portRefresh" style="height:17px; top:2px; margin-left:4px; position:relative; float:left; cursor:pointer; border:1px solid rgba(0, 0, 0, 0.2); padding:2px; background:rgba(255, 255, 255, 0.4);">
+        <div class="floatLeft" id="portRefresh" style="height:17px; top:2px; margin-left:4px; cursor:pointer; border:1px solid rgba(0, 0, 0, 0.2); padding:2px; background:rgba(255, 255, 255, 0.4);">
             <img style="width:16px;" src="./public/images/refresh.png">
         </div>
     </div>
 
-    <div style="height:26px; position:relative; float:right; margin-right:50px; padding:4px; background:rgba(255, 255, 255, 0.2);">
-        <div style="position:relative; float:left; top:5px; margin:0px 2px;">
-            presets:
-        </div>
-        <div class="button" id="save" style="position:relative; float:left; margin:0px 2px;">
-            save
-        </div>
-        <div class="button" id="load" style="position:relative; float:left; margin:0px 2px;">
-            load
+    <div style="position:relative; float:right; margin-right:50px; top:-1px;">
+        <div id="presets" class="button floatLeft" style="font-size:16px; height:24px; padding-top:8px; padding-bottom:2px; padding-left:6px; padding-right:6px;">
+            presets
         </div>
     </div>
 
