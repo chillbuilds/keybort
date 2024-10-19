@@ -39,8 +39,8 @@ let sendData = (data) => {
 function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width: 574,
-    height: 500,
+    width: 530,
+    height: 480,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
     },
