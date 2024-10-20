@@ -22,8 +22,7 @@ let sendData = (data) => {
       console.log(data.toString())
       if(data.toString().includes("key updated")){
         console.log('updated key')
-      }
-      if(data.toString().includes("keys:")){
+      }else if(data.toString().includes("keys:")){
         let keyArr = data.toString().split('keys:').join('').split('\r\n').join('').split(',')
         mainWindow.webContents.send('keyMaps', keyArr)
       }

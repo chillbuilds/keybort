@@ -11,7 +11,6 @@ $('#keyUpdateBtn').on('click', () => {
         modifier = '/'
     }
     window.api.sendString(`${eepromAddress}${keystroke}${modifier}\n`)
-    localStorage.setItem(eepromAddress, keystroke + modifier)
     $('#popup').attr('style', 'display:none;')
     $('#pageShade').attr('style', 'display:none;')
     $('#keystroke').val('')
@@ -31,18 +30,15 @@ $('#rotaryUpdateBtn').on('click', () => {
     }
     if($('#rotaryLeftKey').val()){
         window.api.sendString(`09${$('#rotaryLeftKey').val()}${modifier}\n`)
-        localStorage.setItem('9', $('#rotaryLeftKey').val() + modifier)
     }
     setTimeout(()=>{
         if($('#rotaryBtnKey').val()){
             window.api.sendString(`10${$('#rotaryBtnKey').val()}${modifier}\n`)
-            localStorage.setItem('10', $('#rotaryBtnKey').val() + modifier)
         }
     }, 100)
     setTimeout(()=>{
         if($('#rotaryRightKey').val()){
             window.api.sendString(`11${$('#rotaryRightKey').val()}${modifier}\n`)
-            localStorage.setItem('11', $('#rotaryRightKey').val() + modifier)
         }
     }, 200)
     setTimeout(()=>{
@@ -68,31 +64,26 @@ $('#joystickUpdateBtn').on('click', () => {
     setTimeout(()=>{
         if($('#joystickXMinusKey').val()){
             window.api.sendString(`12${$('#joystickXMinusKey').val()}${modifier}\n`)
-            localStorage.setItem('12', $('#joystickXMinusKey').val() + modifier)
         }
     }, 100)
     setTimeout(()=>{
         if($('#joystickXPlusKey').val()){
             window.api.sendString(`13${$('#joystickXPlusKey').val()}${modifier}\n`)
-            localStorage.setItem('13', $('#joystickXPlusKey').val() + modifier)
         }
     }, 200)
     setTimeout(()=>{
         if($('#joystickBtnKey').val()){
             window.api.sendString(`14${$('#joystickBtnKey').val()}${modifier}\n`)
-            localStorage.setItem('14', $('#joystickBtnKey').val() + modifier)
         }
     }, 300)
     setTimeout(()=>{
         if($('#joystickYMinusKey').val()){
             window.api.sendString(`15${$('#joystickYMinusKey').val()}${modifier}\n`)
-            localStorage.setItem('15', $('#joystickYMinusKey').val() + modifier)
         }
     }, 400)
     setTimeout(()=>{
         if($('#joystickYPlusKey').val()){
             window.api.sendString(`16${$('#joystickYPlusKey').val()}${modifier}\n`)
-            localStorage.setItem('16', $('#joystickYPlusKey').val() + modifier)
         }
     }, 5000)
     $('#popup').attr('style', 'display:none;')
@@ -113,13 +104,11 @@ $('#slidePotUpdateBtn').on('click', () => {
     setTimeout(()=>{
         if($('#slidePotLeftKey').val()){
             window.api.sendString(`17${$('#slidePotLeftKey').val()}${modifier}\n`)
-            localStorage.setItem('17', $('#slidePotLeftKey').val() + modifier)
         }
     }, 100)
     setTimeout(()=>{
         if($('#slidePotRightKey').val()){
             window.api.sendString(`18${$('#slidePotRightKey').val()}${modifier}\n`)
-            localStorage.setItem('18', $('#slidePotRightKey').val() + modifier)
         }
     }, 200)
     setTimeout(()=>{
@@ -134,7 +123,6 @@ $('#slidePotUpdateBtn').on('click', () => {
 
 $('.mouseMode').on('click', function(){
     window.api.sendString(`12/m\n`)
-    localStorage.setItem('mousemode', true)
     $('#popup').attr('style', 'display:none;')
     $('#pageShade').attr('style', 'display:none;')
     $('#joystickUpdate').attr('style', 'display:none;')

@@ -87,10 +87,16 @@ let updatePresetList = () => {
   }
 }
 
-
 ipcRenderer.on('keyMaps', (event, data) => {
   let presetName = document.getElementById('presetName').value
-  localStorage.setItem(presetName, JSON.stringify(data))
-  updatePresetList()
-  document.getElementById('presetName').value = ''
+  // console.log(data.length)
+  let formattedData = data
+    formattedData.forEach((keyCode, index) => {
+      if(keyCode.length < 3){
+        formattedData[index] = '0' + keyCode
+      }
+    })
+    localStorage.setItem(presetName, JSON.stringify(formattedData))
+    updatePresetList()
+    document.getElementById('presetName').value = ''
 })
