@@ -32,17 +32,12 @@ let updatePresetList = () => {
   const presetList = document.getElementById('presetList')
 
   if (localStorage.length > 0) {
-    presetList.textContent = '';
+    presetList.textContent = ''
 
     for (let i = 0; i < localStorage.length; i++) {
         const key = localStorage.key(i)
         const value = localStorage.getItem(key)
-        console.log(`${key}: ${value}`)
-        
-        // let lineStyling = ''
-        // if (i % 2 !== 0) {
-        //     lineStyling = ' background:rgba(255,255,255,0.2); '
-        // }
+        // console.log(`${key}: ${value}`)
 
         const outerDiv = document.createElement('div')
         outerDiv.style.cssText = `cursor:pointer; height:22px; border-bottom:2px solid rgba(0, 0, 0, 0.1);`
@@ -51,6 +46,7 @@ let updatePresetList = () => {
         const presetDiv = document.createElement('div')
         presetDiv.classList.add('preset', 'floatLeft')
         presetDiv.setAttribute('value', value)
+        presetDiv.setAttribute('ref', `preset-${key}`)
         presetDiv.style.cssText = 'width:160px; padding:2px; padding-left: 4px;'
         presetDiv.textContent = key
 
@@ -68,7 +64,10 @@ let updatePresetList = () => {
 
     document.querySelectorAll('.preset').forEach(function(element) {
         element.addEventListener('click', function() {
-            console.log('load da preset')
+            let presetName = element.getAttribute('ref').split('preset-').join('')
+            let keyMapArr = localStorage.getItem(presetName)
+            let keyMapString = 'km' + JSON.parse(keyMapArr).join(',')
+            ipcRenderer.send('send-string', keyMapString)
         })
     })
     

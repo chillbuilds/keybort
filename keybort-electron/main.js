@@ -22,23 +22,17 @@ let sendData = (data) => {
       console.log(data.toString())
       if(data.toString().includes("key updated")){
         console.log('updated key')
-        port.close((err) => {
-          console.log('port closed')
-          if (err) {
-            return console.error('Error closing port:', err.message)
-          }
-        })
       }
       if(data.toString().includes("keys:")){
         let keyArr = data.toString().split('keys:').join('').split('\r\n').join('').split(',')
         mainWindow.webContents.send('keyMaps', keyArr)
-        port.close((err) => {
-          console.log('port closed')
-          if (err) {
-            return console.error('Error closing port:', err.message)
-          }
-        })
       }
+      port.close((err) => {
+        console.log('port closed')
+        if (err) {
+          return console.error('Error closing port:', err.message)
+        }
+      })
     })
   })
   

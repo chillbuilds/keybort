@@ -260,8 +260,14 @@ void serialCheck() {
 
     String incomingString = Serial.readStringUntil('\n');
 
+    String keyMapCheck = incomingString.substring(0, 2);
+
     if(incomingString == "send keys"){
       sendKeyMappings();
+    }else if(keyMapCheck == "km"){
+      
+      String keys = incomingString.substring(2);
+      Serial.println(keys);
     }else{
       int serialIntArray[4];
       String serialStringArray[4];
