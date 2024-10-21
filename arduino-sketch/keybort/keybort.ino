@@ -265,9 +265,17 @@ void serialCheck() {
     if(incomingString == "send keys"){
       sendKeyMappings();
     }else if(keyMapCheck == "km"){
-      
       String keys = incomingString.substring(2);
-      Serial.println(keys);
+
+      int eepromAddress = 1;
+
+      for(int i = 0; i < 108; i = i+3){
+        String asciiCodeStr = (String)keys[i] + (String)keys[i+1] + (String)keys[i+2];
+        int asciiCodeInt = asciiCodeStr.toInt();
+        EEPROM.write(eepromAddress, asciiCodeInt);
+        eepromAddress++;
+      }-+-+-+-+
+      Serial.print("preset updated");
     }else{
       int serialIntArray[4];
       String serialStringArray[4];

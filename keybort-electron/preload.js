@@ -66,7 +66,7 @@ let updatePresetList = () => {
         element.addEventListener('click', function() {
             let presetName = element.getAttribute('ref').split('preset-').join('')
             let keyMapArr = localStorage.getItem(presetName)
-            let keyMapString = 'km' + JSON.parse(keyMapArr).join(',')
+            let keyMapString = 'km' + JSON.parse(keyMapArr).join('')
             ipcRenderer.send('send-string', keyMapString)
         })
     })
