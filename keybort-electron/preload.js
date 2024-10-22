@@ -28,6 +28,30 @@ ipcRenderer.on('noPort', (event, data) => {
   document.getElementById('arduino').textContent = `arduino not found`
 })
 
+ipcRenderer.on('presetLoaded', (event, data) => {
+  document.getElementById('systemMsg').textContent = 'key map updated from preset list'
+  
+  setTimeout(()=>{
+    document.getElementById('systemMsg').textContent = ''
+  }, 2000)
+})
+
+ipcRenderer.on('keyUpdated', (event, data) => {
+  document.getElementById('systemMsg').textContent = 'key updated'
+  
+  setTimeout(()=>{
+    document.getElementById('systemMsg').textContent = ''
+  }, 2000)
+})
+
+ipcRenderer.on('error', (event, data) => {
+  document.getElementById('systemMsg').textContent = data
+  
+  setTimeout(()=>{
+    document.getElementById('systemMsg').textContent = ''
+  }, 2000)
+})
+
 let updatePresetList = () => {
   const presetList = document.getElementById('presetList')
 
@@ -37,7 +61,6 @@ let updatePresetList = () => {
     for (let i = 0; i < localStorage.length; i++) {
         const key = localStorage.key(i)
         const value = localStorage.getItem(key)
-        // console.log(`${key}: ${value}`)
 
         const outerDiv = document.createElement('div')
         outerDiv.style.cssText = `cursor:pointer; height:22px; border-bottom:2px solid rgba(0, 0, 0, 0.1);`
@@ -68,6 +91,9 @@ let updatePresetList = () => {
             let keyMapArr = localStorage.getItem(presetName)
             let keyMapString = 'km' + JSON.parse(keyMapArr).join('')
             ipcRenderer.send('send-string', keyMapString)
+            document.getElementById('pageShade').style.display = 'none'
+            document.getElementById('presetPopup').style.display = 'none'
+            document.getElementById('systemMsg').textContent = 'updating key map from preset list'
         })
     })
     
@@ -77,7 +103,6 @@ let updatePresetList = () => {
           selectedPresetDiv.style.display = 'none'
 
           selectedPreset = element.getAttribute('ref').split('preset-').join('')
-          console.log(selectedPreset)
           localStorage.removeItem(selectedPreset)
         })
     })
@@ -89,7 +114,6 @@ let updatePresetList = () => {
 
 ipcRenderer.on('keyMaps', (event, data) => {
   let presetName = document.getElementById('presetName').value
-  // console.log(data.length)
   let formattedData = data
     formattedData.forEach((keyCode, index) => {
       if(keyCode.length < 3){

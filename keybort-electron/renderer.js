@@ -11,6 +11,7 @@ $('#keyUpdateBtn').on('click', () => {
         modifier = '/'
     }
     window.api.sendString(`${eepromAddress}${keystroke}${modifier}\n`)
+    $('systemMsg').text(`updating key`)
     $('#popup').attr('style', 'display:none;')
     $('#pageShade').attr('style', 'display:none;')
     $('#keystroke').val('')
@@ -85,7 +86,14 @@ $('#joystickUpdateBtn').on('click', () => {
         if($('#joystickYPlusKey').val()){
             window.api.sendString(`16${$('#joystickYPlusKey').val()}${modifier}\n`)
         }
-    }, 5000)
+    }, 500)
+    setTimeout(()=>{
+        $('#joystickXMinusKey').val('')
+        $('#joystickXPlusKey').val('')
+        $('#joystickBtnKey').val('')
+        $('#joystickYMinusKey').val('')
+        $('#joystickYPlusKey').val('')
+    }, 600)
     $('#popup').attr('style', 'display:none;')
     $('#pageShade').attr('style', 'display:none;')
     $('#joystickUpdate').attr('style', 'display:none;')

@@ -14,29 +14,35 @@ let sendData = (data) => {
   
     port.write(parsedData, (err) => {
       if (err) {
-        return console.error('Error writing to port:', err.message)
+        mainWindow.webContents.send('error', 'error writing to port: ' + err.message)
+        return console.error('error writing to port:', err.message)
       }
     })
   
     port.on('data', (data) => {
       console.log(data.toString())
-      if(data.toString().includes("key updated")){
-        console.log('updated key')
+      if(data.toString().includes('key updated')){
+        console.log('key updated')
+        mainWindow.webContents.send('keyUpdated')
       }else if(data.toString().includes("keys:")){
         let keyArr = data.toString().split('keys:').join('').split('\r\n').join('').split(',')
         mainWindow.webContents.send('keyMaps', keyArr)
+      }else if(data.toString().includes('preset updated')){
+        mainWindow.webContents.send('presetLoaded')
       }
       port.close((err) => {
         console.log('port closed')
         if (err) {
-          return console.error('Error closing port:', err.message)
+          mainWindow.webContents.send('error', 'error closing port: ' + err.message)
+          return console.error('error closing port:', err.message)
         }
       })
     })
   })
   
   port.on('error', (err) => {
-    console.error('Error: ', err.message)
+    mainWindow.webContents.send('error', err.message)
+    console.error('error: ', err.message)
   })
 }
 
@@ -104,6 +110,7 @@ async function listSerialPorts() {
       mainWindow.webContents.send('noPort')
     }
   } catch (err) {
-    console.error('Error listing serial ports:', err.message)
+    mainWindow.webContents.send('error', 'error listing serial ports: ' + err.message)
+    console.error('error listing serial ports:', err.message)
   }
 }

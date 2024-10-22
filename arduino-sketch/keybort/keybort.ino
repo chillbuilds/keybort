@@ -296,9 +296,9 @@ void serialCheck() {
       Serial.print("modifier: ");
       Serial.println((int)modifier);
 
+      Serial.print("key updated");
       EEPROM.write(addressInt, (int)serialIntArray[2]);
       EEPROM.write(addressInt + 18, modifier);
-      Serial.println("key updated");
 
       if (addressInt == 1) {
         key1Val = (byte)serialIntArray[2];
