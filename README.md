@@ -25,6 +25,7 @@ built with
 # required tools
 * 3d printer
 * soldering iron
+* utility knife
 
 # assembly guide (needs pics)
 * print the things

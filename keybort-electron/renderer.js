@@ -4,20 +4,30 @@ $('#keyUpdateBtn').on('click', () => {
     // eeprom addresses
     // 1 - 8
     let keystroke = $('#keystroke').val()
-    let modifier = $('input[name="modifier"]:checked').val()
-    if(modifier){
-        modifier = modifier.split('').shift()
+    if(keystroke.length < 1){
+        $('#systemMsg').css('color', 'white')
+        $('#systemMsg').text('key cannot be blank')
+        $('#keystroke').focus()
+        setTimeout(()=>{
+            $('#systemMsg').css('color', 'black')
+            $('#systemMsg').text('')
+        }, 1000)
     }else{
-        modifier = '/'
+        let modifier = $('input[name="modifier"]:checked').val()
+        if(modifier){
+            modifier = modifier.split('').shift()
+        }else{
+            modifier = '/'
+        }
+        window.api.sendString(`${eepromAddress}${keystroke}${modifier}\n`)
+        $('systemMsg').text(`updating key`)
+        $('#popup').attr('style', 'display:none;')
+        $('#pageShade').attr('style', 'display:none;')
+        $('#keystroke').val('')
+        $('#keyUpdate').attr('style', 'display:none;')
+        $('#keySpriteSrc').attr('src', `./public/images/key-sprites/keybort-sprite.png`)
+        $('input[type="checkbox"]').prop('checked', false)
     }
-    window.api.sendString(`${eepromAddress}${keystroke}${modifier}\n`)
-    $('systemMsg').text(`updating key`)
-    $('#popup').attr('style', 'display:none;')
-    $('#pageShade').attr('style', 'display:none;')
-    $('#keystroke').val('')
-    $('#keyUpdate').attr('style', 'display:none;')
-    $('#keySpriteSrc').attr('src', `./public/images/key-sprites/keybort-sprite.png`)
-    $('input[type="checkbox"]').prop('checked', false)
 })
 
 $('#rotaryUpdateBtn').on('click', () => {
@@ -164,10 +174,12 @@ $('#savePreset').on('click', function(){
         window.api.sendString('send keys')
     }else{
         $('#presetName').focus()
+        $('#systemMsg').css('color', 'white')
         $('#systemMsg').text('preset name cannot be blank')
         setTimeout(()=>{
+            $('#systemMsg').css('color', 'black')
             $('#systemMsg').text('')
-        }, 2000)
+        }, 1500)
     }
 })
 

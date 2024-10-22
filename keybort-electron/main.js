@@ -23,10 +23,12 @@ let sendData = (data) => {
       console.log(data.toString())
       if(data.toString().includes('key updated')){
         mainWindow.webContents.send('keyUpdated')
-      }else if(data.toString().includes("keys:")){
+      }else 
+      if(data.toString().includes("keys:")){
         let keyArr = data.toString().split('keys:').join('').split('\r\n').join('').split(',')
         mainWindow.webContents.send('keyMaps', keyArr)
-      }else if(data.toString().includes('preset updated')){
+      }else 
+      if(data.toString().includes('preset updated')){
         mainWindow.webContents.send('presetLoaded')
       }
       port.close((err) => {
