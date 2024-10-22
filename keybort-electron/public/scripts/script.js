@@ -59,10 +59,6 @@ $('#presetClose').on('click', function(){
     $('#presetPopup').attr('style', 'display:none')
 })
 
-$('.deleteKeyMap').on('click', function(){
-    console.log('delete key map')
-})
-
 $('input[type="checkbox"]').on('click', function(e){
     e.preventDefault()
 })
@@ -74,5 +70,13 @@ $('input[type="checkbox"]').mousedown(function(e) {
     }else{
         $('input[type="checkbox"]').prop('checked', false)
         radio.prop('checked', true)
+    }
+})
+
+$('.keyInput').on('input', function() {
+    let inputVal = $(this).val()
+
+    if (inputVal.length > 1) {
+        $(this).val(inputVal.slice(-1))
     }
 })

@@ -4,6 +4,4 @@
  
  * ditching mousemode
  * remove or replace volume mode
- * sending messages to front end
- * limit key inputs to 1 char
  * mouse clicks?

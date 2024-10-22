@@ -164,7 +164,10 @@ $('#savePreset').on('click', function(){
         window.api.sendString('send keys')
     }else{
         $('#presetName').focus()
-        console.log('preset name is blank')
+        $('#systemMsg').text('preset name cannot be blank')
+        setTimeout(()=>{
+            $('#systemMsg').text('')
+        }, 2000)
     }
 })
 

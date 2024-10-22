@@ -22,7 +22,6 @@ let sendData = (data) => {
     port.on('data', (data) => {
       console.log(data.toString())
       if(data.toString().includes('key updated')){
-        console.log('key updated')
         mainWindow.webContents.send('keyUpdated')
       }else if(data.toString().includes("keys:")){
         let keyArr = data.toString().split('keys:').join('').split('\r\n').join('').split(',')
@@ -31,7 +30,6 @@ let sendData = (data) => {
         mainWindow.webContents.send('presetLoaded')
       }
       port.close((err) => {
-        console.log('port closed')
         if (err) {
           mainWindow.webContents.send('error', 'error closing port: ' + err.message)
           return console.error('error closing port:', err.message)
@@ -93,7 +91,7 @@ ipcMain.on('send-string', (event, str) => {
     else{
       sendData(str)
     }
-    console.log('Received string:', str)
+    console.log('received string:', str)
 })
 
 async function listSerialPorts() {
