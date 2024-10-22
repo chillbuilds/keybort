@@ -272,9 +272,9 @@ void serialCheck() {
       for(int i = 0; i < 108; i = i+3){
         String asciiCodeStr = (String)keys[i] + (String)keys[i+1] + (String)keys[i+2];
         int asciiCodeInt = asciiCodeStr.toInt();
-        EEPROM.write(eepromAddress, asciiCodeInt);
+        updateCurrentKeyMap(eepromAddress, asciiCodeInt);
         eepromAddress++;
-      }-+-+-+-+
+      }
       Serial.print("preset updated");
     }else{
       int serialIntArray[4];
@@ -405,4 +405,151 @@ void sendKeyMappings() {
   }
   Serial.println(keyArr);
 
+}
+
+void updateCurrentKeyMap(int address, int asciiCode) {
+  if(address == 1 && key1Val != asciiCode){
+    key1Val = asciiCode;
+    EEPROM.write(address, asciiCode);
+  }
+  if(address == 2 && key2Val != asciiCode){
+    key2Val = asciiCode;
+    EEPROM.write(address, asciiCode);
+  }
+  if(address == 3 && key3Val != asciiCode){
+    key3Val = asciiCode;
+    EEPROM.write(address, asciiCode);
+  }
+  if(address == 4 && key4Val != asciiCode){
+    key4Val = asciiCode;
+    EEPROM.write(address, asciiCode);
+  }
+  if(address == 5 && key5Val != asciiCode){
+    key5Val = asciiCode;
+    EEPROM.write(address, asciiCode);
+  }
+  if(address == 6 && key6Val != asciiCode){
+    key6Val = asciiCode;
+    EEPROM.write(address, asciiCode);
+  }
+  if(address == 7 && key7Val != asciiCode){
+    key7Val = asciiCode;
+    EEPROM.write(address, asciiCode);
+  }
+  if(address == 8 && key8Val != asciiCode){
+    key8Val = asciiCode;
+    EEPROM.write(address, asciiCode);
+  }
+  if(address == 9 && rotaryMinusVal != asciiCode){
+    rotaryMinusVal = asciiCode;
+    EEPROM.write(address, asciiCode);
+  }
+  if(address == 10 && rotaryBtnVal != asciiCode){
+    rotaryBtnVal = asciiCode;
+    EEPROM.write(address, asciiCode);
+  }
+  if(address == 11 && rotaryPlusVal != asciiCode){
+    rotaryPlusVal = asciiCode;
+    EEPROM.write(address, asciiCode);
+  }
+  if(address == 12 && joystickXMinusVal != asciiCode){
+    joystickXMinusVal = asciiCode;
+    EEPROM.write(address, asciiCode);
+  }
+  if(address == 13 && joystickXPlusVal != asciiCode){
+    joystickXPlusVal = asciiCode;
+    EEPROM.write(address, asciiCode);
+  }
+  if(address == 14 && joystickBtnVal != asciiCode){
+    joystickBtnVal = asciiCode;
+    EEPROM.write(address, asciiCode);
+  }
+  if(address == 15 && joystickYMinusVal != asciiCode){
+    joystickYMinusVal = asciiCode;
+    EEPROM.write(address, asciiCode);
+  }
+  if(address == 16 && joystickYPlusVal != asciiCode){
+    joystickYPlusVal = asciiCode;
+    EEPROM.write(address, asciiCode);
+  }
+  if(address == 17 && slidePotMinusVal != asciiCode){
+    slidePotMinusVal = asciiCode;
+    EEPROM.write(address, asciiCode);
+  }
+  if(address == 18 && slidePotPlusVal != asciiCode){
+    slidePotPlusVal = asciiCode;
+    EEPROM.write(address, asciiCode);
+  }
+  if(address == 19 && key1Mod != asciiCode){
+    key1Mod = asciiCode;
+    EEPROM.write(address, asciiCode); 
+  }
+  if(address == 20 && key2Mod != asciiCode){
+    key2Mod = asciiCode;
+    EEPROM.write(address, asciiCode);
+  }
+  if(address == 21 && key3Mod != asciiCode){
+    key3Mod = asciiCode;
+    EEPROM.write(address, asciiCode);
+  }
+  if(address == 22 && key4Mod != asciiCode){
+    key4Mod = asciiCode;
+    EEPROM.write(address, asciiCode);
+  }
+  if(address == 23 && key5Mod != asciiCode){
+    key5Mod = asciiCode;
+    EEPROM.write(address, asciiCode);
+  }
+  if(address == 24 && key6Mod != asciiCode){
+    key6Mod = asciiCode;
+    EEPROM.write(address, asciiCode);
+  }
+  if(address == 25 && key7Mod != asciiCode){
+    key7Mod = asciiCode;
+    EEPROM.write(address, asciiCode);
+  }
+  if(address == 26 && key8Mod != asciiCode){
+    key8Mod = asciiCode;
+    EEPROM.write(address, asciiCode);
+  }
+  if(address == 27 && rotaryMinusMod != asciiCode){
+    rotaryMinusMod = asciiCode;
+    EEPROM.write(address, asciiCode);
+  }
+  if(address == 28 && rotaryBtnMod != asciiCode){
+    rotaryBtnMod = asciiCode;
+    EEPROM.write(address, asciiCode);
+  }
+  if(address == 29 && rotaryPlusMod != asciiCode){
+    rotaryPlusMod = asciiCode;
+    EEPROM.write(address, asciiCode);
+  }
+  if(address == 30 && joystickXMinusMod != asciiCode){
+    joystickXMinusMod = asciiCode;
+    EEPROM.write(address, asciiCode);
+  }
+  if(address == 31 && joystickXPlusMod != asciiCode){
+    joystickXPlusMod = asciiCode;
+    EEPROM.write(address, asciiCode);
+  }
+  if(address == 32 && joystickBtnMod != asciiCode){
+    joystickBtnMod = asciiCode;
+    EEPROM.write(address, asciiCode);
+  }
+  if(address == 33 && joystickYMinusMod != asciiCode){
+    joystickYMinusMod = asciiCode;
+    EEPROM.write(address, asciiCode);
+  }
+  if(address == 34 && joystickYPlusMod != asciiCode){
+    joystickYPlusMod = asciiCode;
+    EEPROM.write(address, asciiCode);
+  }
+  if(address == 35 && slidePotMinusMod != asciiCode){
+    slidePotMinusMod  = asciiCode;
+    EEPROM.write(address, asciiCode);
+  }
+  if(address == 36 && slidePotPlusMod != asciiCode){
+    slidePotPlusMod = asciiCode;
+    EEPROM.write(address, asciiCode);
+  } 
 }
