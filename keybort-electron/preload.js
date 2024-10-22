@@ -41,7 +41,7 @@ ipcRenderer.on('keyUpdated', (event, data) => {
   
   setTimeout(()=>{
     document.getElementById('systemMsg').textContent = ''
-  }, 2000)
+  }, 1000)
 })
 
 ipcRenderer.on('error', (event, data) => {

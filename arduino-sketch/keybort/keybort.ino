@@ -297,79 +297,149 @@ void serialCheck() {
       Serial.println((int)modifier);
 
       Serial.print("key updated");
-      EEPROM.write(addressInt, (int)serialIntArray[2]);
-      EEPROM.write(addressInt + 18, modifier);
 
-      if (addressInt == 1) {
+      if (addressInt == 1 && key1Val != (int)serialIntArray[2]) {
+        EEPROM.write(addressInt, (int)serialIntArray[2]);
         key1Val = (byte)serialIntArray[2];
+      }
+      if (addressInt == 1 && key1Mod != (int)modifier) {
+        EEPROM.write(addressInt + 18, modifier);
         key1Mod = (byte)serialIntArray[3];
       }
-      if (addressInt == 2) {
+      if (addressInt == 2 && key2Val != (int)serialIntArray[2]) {
+        EEPROM.write(addressInt, (int)serialIntArray[2]);
         key2Val = (byte)serialIntArray[2];
+      }
+      if (addressInt == 2 && key2Mod != (int)modifier) {
+        EEPROM.write(addressInt + 18, modifier);
         key2Mod = (byte)serialIntArray[3];
       }
-      if (addressInt == 3) {
+      if (addressInt == 3 && key3Val != (int)serialIntArray[2]) {
+        EEPROM.write(addressInt, (int)serialIntArray[2]);
         key3Val = (byte)serialIntArray[2];
+      }
+      if (addressInt == 3 && key3Mod != (int)modifier) {
+        EEPROM.write(addressInt + 18, modifier);
         key3Mod = (byte)serialIntArray[3];
       }
-      if (addressInt == 4) {
+      if (addressInt == 4 && key4Val != (int)serialIntArray[2]) {
+        EEPROM.write(addressInt, (int)serialIntArray[2]);
         key4Val = (byte)serialIntArray[2];
+      }
+      if (addressInt == 4 && key4Mod != (int)modifier) {
+        EEPROM.write(addressInt + 18, modifier);
         key4Mod = (byte)serialIntArray[3];
       }
-      if (addressInt == 5) {
+      if (addressInt == 5 && key5Val != (int)serialIntArray[2]) {
+        EEPROM.write(addressInt, (int)serialIntArray[2]);
         key5Val = (byte)serialIntArray[2];
+      }
+      if (addressInt == 5 && key5Mod != (int)modifier) {
+        EEPROM.write(addressInt + 18, modifier);
         key5Mod = (byte)serialIntArray[3];
       }
-      if (addressInt == 6) {
+      if (addressInt == 6 && key6Val != (int)serialIntArray[2]) {
+        EEPROM.write(addressInt, (int)serialIntArray[2]);
         key6Val = (byte)serialIntArray[2];
+      }
+      if (addressInt == 6 && key6Mod != (int)modifier) {
+        EEPROM.write(addressInt + 18, modifier);
         key6Mod = (byte)serialIntArray[3];
       }
-      if (addressInt == 7) {
+      if (addressInt == 7 && key7Val != (int)serialIntArray[2]) {
+        EEPROM.write(addressInt, (int)serialIntArray[2]);
         key7Val = (byte)serialIntArray[2];
+      }
+      if (addressInt == 7 && key7Mod != (int)modifier) {
+        EEPROM.write(addressInt + 18, modifier);
         key7Mod = (byte)serialIntArray[3];
       }
-      if (addressInt == 8) {
+      if (addressInt == 8 && key8Val != (int)serialIntArray[2]) {
+        EEPROM.write(addressInt, (int)serialIntArray[2]);
         key8Val = (byte)serialIntArray[2];
+      }
+      if (addressInt == 8 && key8Mod != (int)modifier) {
+        EEPROM.write(addressInt + 18, modifier);
         key8Mod = (byte)serialIntArray[3];
       }
-      if (addressInt == 9) {
+      if (addressInt == 9 && rotaryMinusVal != (int)serialIntArray[2]) {
+        EEPROM.write(addressInt, (int)serialIntArray[2]);
         rotaryMinusVal = (byte)serialIntArray[2];
+      }
+      if (addressInt == 9 && rotaryMinusMod != (int)modifier) {
+        EEPROM.write(addressInt + 18, modifier);
         rotaryMinusMod = (byte)serialIntArray[3];
       }
-      if (addressInt == 10) {
+      if (addressInt == 10 && rotaryBtnVal != (int)serialIntArray[2]) {
+        EEPROM.write(addressInt, (int)serialIntArray[2]);
         rotaryBtnVal = (byte)serialIntArray[2];
+      }
+      if (addressInt == 10 && rotaryBtnMod != (int)modifier) {
+        EEPROM.write(addressInt + 18, modifier);
         rotaryBtnMod = (byte)serialIntArray[3];
       }
-      if (addressInt == 11) {
+      if (addressInt == 11 && rotaryPlusVal != (int)serialIntArray[2]) {
+        EEPROM.write(addressInt, (int)serialIntArray[2]);
         rotaryPlusVal = (byte)serialIntArray[2];
+      }
+      if (addressInt == 11 && rotaryPlusMod != (int)modifier) {
+        EEPROM.write(addressInt + 18, modifier);
         rotaryPlusMod = (byte)serialIntArray[3];
       }
-      if (addressInt == 12) {
+      if (addressInt == 12 && joystickXMinusVal != (int)serialIntArray[2]) {
+        EEPROM.write(addressInt, (int)serialIntArray[2]);
         joystickXMinusVal = (byte)serialIntArray[2];
+      }
+      if (addressInt == 12 && joystickXMinusMod != (int)modifier) {
+        EEPROM.write(addressInt + 18, modifier);
         joystickXMinusMod = (byte)serialIntArray[3];
       }
-      if (addressInt == 13) {
+      if (addressInt == 13 && joystickXPlusVal != (int)serialIntArray[2]) {
+        EEPROM.write(addressInt, (int)serialIntArray[2]);
         joystickXPlusVal = (byte)serialIntArray[2];
+      }
+      if (addressInt == 13 && joystickXPlusMod != (int)modifier) {
+        EEPROM.write(addressInt + 18, modifier);
         joystickXPlusMod = (byte)serialIntArray[3];
       }
-      if (addressInt == 14) {
+      if (addressInt == 14 && joystickBtnVal != (int)serialIntArray[2]) {
+        EEPROM.write(addressInt, (int)serialIntArray[2]);
         joystickBtnVal = (byte)serialIntArray[2];
+      }
+      if (addressInt == 14 && joystickBtnMod != (int)modifier) {
+        EEPROM.write(addressInt + 18, modifier);
         joystickBtnMod = (byte)serialIntArray[3];
       }
-      if (addressInt == 15) {
+      if (addressInt == 15 && joystickYMinusVal != (int)serialIntArray[2]) {
+        EEPROM.write(addressInt, (int)serialIntArray[2]);
         joystickYMinusVal = (byte)serialIntArray[2];
+      }
+      if (addressInt == 15 && joystickYMinusMod != (int)modifier) {
+        EEPROM.write(addressInt + 18, modifier);
         joystickYMinusMod = (byte)serialIntArray[3];
       }
-      if (addressInt == 16) {
+      if (addressInt == 16 && joystickYPlusVal != (int)serialIntArray[2]) {
+        EEPROM.write(addressInt, (int)serialIntArray[2]);
         joystickYPlusVal = (byte)serialIntArray[2];
+      }
+      if (addressInt == 16 && joystickYPlusMod != (int)modifier) {
+        EEPROM.write(addressInt + 18, modifier);
         joystickYPlusMod = (byte)serialIntArray[3];
       }
-      if (addressInt == 17) {
+      if (addressInt == 17 && slidePotMinusVal != (int)serialIntArray[2]) {
+        EEPROM.write(addressInt, (int)serialIntArray[2]);
         slidePotMinusVal = (byte)serialIntArray[2];
+      }
+      if (addressInt == 17 && slidePotMinusMod != (int)modifier) {
+        EEPROM.write(addressInt + 18, modifier);
         slidePotMinusMod = (byte)serialIntArray[3];
       }
-      if (addressInt == 18) {
+      if (addressInt == 18 && slidePotPlusVal != (int)serialIntArray[2]) {
+        EEPROM.write(addressInt, (int)serialIntArray[2]);
         slidePotPlusVal = (byte)serialIntArray[2];
+      }
+      if (addressInt == 18 && slidePotPlusMod != (int)modifier) {
+        EEPROM.write(addressInt + 18, modifier);
         slidePotPlusMod = (byte)serialIntArray[3];
       }
     }

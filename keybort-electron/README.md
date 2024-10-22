@@ -5,3 +5,4 @@
  * ditching mousemode
  * remove or replace volume mode
  * mouse clicks?
+ * error msg for sending empty key
